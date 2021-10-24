@@ -1,10 +1,6 @@
 <template>
   <div id="page">
-    <nav id="page-nav">
-      <router-link to="/">Home</router-link>
-      |
-      <router-link to="/about">About</router-link>
-    </nav>
+    <AppMenu />
 
     <main id="page-main">
       <slot></slot>
@@ -13,7 +9,12 @@
 </template>
 
 <script>
+import AppMenu from "./Menu.vue";
+
 export default {
   name: "Layout",
+  components: {
+    AppMenu,
+  },
 };
 </script>
