@@ -1,3 +1,5 @@
+const globalStylesImports = ["~@/styles/_variables.scss"];
+
 /** @type {import("@vue/cli-service").ProjectOptions} */
 module.exports = {
   lintOnSave: false,
@@ -5,10 +7,21 @@ module.exports = {
 
   css: {
     sourceMap: process.env.NODE_ENV !== "production",
+
+    loaderOptions: {
+      sass: {
+        additionalData: globalStylesImports.map((p) => `@import "${p}"`).join("\n"),
+      },
+      scss: {
+        additionalData: [...globalStylesImports.map((p) => `@import "${p}"`), ""].join(";\n"),
+      },
+    },
   },
 
   chainWebpack: (config) => {
     config.mode = "development";
+
+    config.performance.hints(config.mode === "production" ? "warning" : false);
   },
 
   configureWebpack: (config) => {
