@@ -23,8 +23,10 @@ const pascalCase = function (str) {
 
 /**
  *
+ * @example if enabled removeDirs ./dir1/dir2/filename.js => filename
+ * @example if disabled removeDirs ./dir1/dir2/filename.js => dir1/dir2/filename
  * @param {string} str
- * @param {boolean} removeDirs Remove dirs? ./dir1/dir2/filename.js => if true filename else dir1/dir2/filename
+ * @param {boolean} removeDirs Remove dirs? ./dir1/dir2/filename.js
  * @returns {string}
  */
 const prepareFileName = function (str, removeDirs = false) {
