@@ -1,16 +1,16 @@
 <template>
-  <Layout>
+  <DefaultLayout>
     <h1>This is an about page</h1>
-  </Layout>
+  </DefaultLayout>
 </template>
 
 <script>
-import Layout from "@/layout/index.vue";
+import DefaultLayout from "@/layout/index.vue";
 
 export default {
   name: "About",
   components: {
-    Layout,
+    DefaultLayout,
   },
 };
 </script>
