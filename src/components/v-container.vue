@@ -1,8 +1,27 @@
-<template>
-  <div class="container">
-    <slot />
-  </div>
-</template>
+<script>
+import { mergeData } from "vue-functional-data-merge";
+
+export default {
+  functional: true,
+
+  props: {
+    tagName: {
+      type: String,
+      default: "div",
+    },
+  },
+
+  render: (h, { data, props, children }) => {
+    return h(
+      props.tagName,
+      mergeData(data, {
+        staticClass: "container",
+      }),
+      children
+    );
+  },
+};
+</script>
 
 <style lang="scss">
 .container {
