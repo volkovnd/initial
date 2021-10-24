@@ -1,6 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
+import { BASE_URL } from "@/config";
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -18,7 +20,7 @@ const routes = [
 
 const router = new VueRouter({
   mode: "history",
-  base: process.env.BASE_URL,
+  base: BASE_URL,
   routes,
 });
 

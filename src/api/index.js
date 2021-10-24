@@ -1,15 +1,15 @@
 import axios from "axios";
 
-const baseURL = process.env.VUE_APP_BASE_API_URL || "/api";
+import { API_BASE_URL } from "@/config";
 
 const api = axios.create({
-  baseURL,
+  baseURL: API_BASE_URL,
   headers: {
     "Content-Type": "application/json",
   },
 });
 
-function apiRequest(path, method = "get", data = {}) {
+const apiRequest = function (path, method = "get", data = {}) {
   return new Promise((resolve, reject) => {
     api
       .request({
@@ -30,7 +30,7 @@ function apiRequest(path, method = "get", data = {}) {
         reject(error);
       });
   });
-}
+};
 
 /**
  * @example export const getPostById = (id, data) => apiRequest(`/posts/${id}`, "get", data);
