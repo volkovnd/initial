@@ -1,19 +1,17 @@
-import { kebabCase, pascalCase, prepareFileName } from "@/utils/string";
+import { pascalCase, prepareFileName } from "@/utils/string";
 
-const context = require.context("@/components", true, /ui[\w-]+\.vue$/);
+const context = require.context("@/components", true, /v-[\w-]+\.vue$/);
 
 const components = context
   .keys()
   .map((fileName) => ({
-    name: "UI" + pascalCase(prepareFileName(fileName).replace(/^ui-?/, "")),
+    name: pascalCase(prepareFileName(fileName)),
     config: context(fileName).default,
-    component: kebabCase(prepareFileName(fileName)),
   }))
   .reduce(
-    (components, { name, component, config }) => ({
-      [component]: {
+    (components, { name, config }) => ({
+      [name]: {
         ...config,
-        name,
       },
 
       ...components,

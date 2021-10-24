@@ -1,21 +1,24 @@
 <template>
   <div id="page">
-    <app-menu />
+    <AppHeader />
+    <AppMenu />
 
     <main id="page-main">
-      <ui-container>
+      <VContainer>
         <slot></slot>
-      </ui-container>
+      </VContainer>
     </main>
   </div>
 </template>
 
 <script>
-import AppMenu from "./Menu.vue";
+import AppHeader from "./header.vue";
+import AppMenu from "./menu.vue";
 
 export default {
   name: "Layout",
   components: {
+    AppHeader,
     AppMenu,
   },
 };
