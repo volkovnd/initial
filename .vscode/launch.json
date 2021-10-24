@@ -1,0 +1,26 @@
+{
+  "version": "0.2.0",
+  "compounds": [],
+  "configurations": [
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "vuejs: chrome",
+      "url": "http://localhost:8080",
+      "webRoot": "${workspaceFolder}/src",
+      "breakOnLoad": true,
+      "preLaunchTask": "npm:serve",
+      "sourceMaps": true,
+      "sourceMapPathOverrides": {
+        "webpack:/*": "${webRoot}/*",
+        "/./*": "${webRoot}/*",
+        "/src/*": "${webRoot}/*",
+        "/*": "*",
+        "/./~/*": "${workspaceFolder}/node_modules/*"
+      },
+      "userDataDir": "${workspaceFolder}/.vscode/chrome",
+      "disableNetworkCache": true,
+      "vueComponentPaths": ["${workspaceFolder}/**/*.vue"]
+    }
+  ]
+}

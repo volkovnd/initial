@@ -1,0 +1,13 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "editorconfig.editorconfig",
+    "dbaeumer.vscode-eslint",
+    "stylelint.vscode-stylelint",
+    "digitalbrainstem.javascript-ejs-support",
+    "octref.vetur",
+    "mrmlnc.vscode-scss",
+    "csstools.postcss",
+    "mhmadhamster.postcss-language"
+  ]
+}
