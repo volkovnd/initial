@@ -3,20 +3,11 @@ import VueRouter from "vue-router";
 
 import { BASE_URL } from "@/config";
 
+import { loadRoutes } from "./loadRoutes";
+
 Vue.use(VueRouter);
 
-const routes = [
-  {
-    path: "/",
-    name: "home",
-    component: () => import(/* webpackChunkName: "home" */ "@/views/home.vue"),
-  },
-  {
-    path: "/about",
-    name: "about",
-    component: () => import(/* webpackChunkName: "about" */ "@/views/about.vue"),
-  },
-];
+const routes = loadRoutes();
 
 const router = new VueRouter({
   mode: "history",
