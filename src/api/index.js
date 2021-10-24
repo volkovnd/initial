@@ -15,7 +15,6 @@ function apiRequest(path, method = "get", data = {}) {
       .request({
         url: path,
         method,
-
         ...(method === "get"
           ? {
               params: data,
@@ -33,5 +32,8 @@ function apiRequest(path, method = "get", data = {}) {
   });
 }
 
-export const get = (path, data) => apiRequest(path, "get", data);
-export const post = (path, data) => apiRequest(path, "post", data);
+/**
+ * @example export const getPostById = (id, data) => apiRequest(`/posts/${id}`, "get", data);
+ * @example export const getPosts = (data) => apiRequest(`/posts`, "get", data);
+ * @example export const createPost = (data) => apiRequest(`/posts`, "post", data);
+ */
