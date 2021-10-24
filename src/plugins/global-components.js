@@ -1,4 +1,5 @@
 import { pascalCase, prepareFileName } from "@/utils/string";
+import { registerComponents } from "@/utils/components";
 
 const context = require.context("@/components", true, /v-[\w-]+\.vue$/);
 
@@ -20,9 +21,7 @@ const components = context
   );
 
 const install = (Vue) => {
-  for (const component in components) {
-    Vue.component(component, components[component]);
-  }
+  registerComponents(Vue, components);
 };
 
 export const GlobalComponentsPlugin = {
