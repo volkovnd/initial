@@ -1,6 +1,8 @@
 <template>
   <nav id="page-nav">
-    <router-link v-for="link in links" :key="link.to" :to="link.to">{{ link.body }}</router-link>
+    <ui-container>
+      <router-link v-for="link in links" :key="link.to" :to="link.to">{{ link.body }}</router-link>
+    </ui-container>
   </nav>
 </template>
 

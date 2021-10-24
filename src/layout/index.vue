@@ -1,9 +1,11 @@
 <template>
   <div id="page">
-    <AppMenu />
+    <app-menu />
 
     <main id="page-main">
-      <slot></slot>
+      <ui-container>
+        <slot></slot>
+      </ui-container>
     </main>
   </div>
 </template>

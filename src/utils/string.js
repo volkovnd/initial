@@ -21,8 +21,14 @@ const pascalCase = function (str) {
   return upperFirst(camelCase(str));
 };
 
-const prepareFileName = function (str) {
-  return str.replace(/^\.\//, "").replace(/\.[\w]+$/);
+/**
+ *
+ * @param {string} str
+ * @param {boolean} removeDirs Remove dirs? ./dir1/dir2/filename.js => if true filename else dir1/dir2/filename
+ * @returns {string}
+ */
+const prepareFileName = function (str, removeDirs = false) {
+  return str.replace(RegExp(`^\\.${removeDirs ? ".*" : ""}\\/`), "").replace(/\.\w+$/, "");
 };
 
 export { kebabCase, camelCase, pascalCase, upperFirst, prepareFileName };
