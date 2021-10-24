@@ -1,7 +1,7 @@
 <template>
   <nav id="page-nav">
     <VContainer>
-      <router-link v-for="link in links" :key="link.to" :to="link.to">{{ link.body }}</router-link>
+      <router-link v-for="link in links" :key="link.to" :to="link.to">{{ link.title }}</router-link>
     </VContainer>
   </nav>
 </template>
@@ -13,11 +13,11 @@ export default {
       links: [
         {
           to: "/",
-          body: "Home",
+          title: "Home",
         },
         {
           to: "/about",
-          body: "About",
+          title: "About",
         },
       ],
     };
