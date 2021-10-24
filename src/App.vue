@@ -11,25 +11,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import "~normalize.css/normalize.css";
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-body {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin-top: 0;
-}
+@import "~@/styles/reset";
 </style>
