@@ -1,5 +1,5 @@
 {
-  "name": "@volkovnd/initial-template",
+  "name": "@volkovnd/initial",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -32,7 +32,7 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "^3.3.1",
-    "eslint-plugin-vue": "^6.2.2",
+    "eslint-plugin-vsue": "^6.2.2",
     "express": "^4.17.1",
     "hygen": "^6.1.0",
     "postcss-html": "^1.1.0",
@@ -48,5 +48,16 @@
     "stylelint-scss": "^4.0.0",
     "vue-template-compiler": "^2.6.11"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "description": "New project initial template",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/volkovnd/initial.git"
+  },
+  "keywords": [],
+  "author": "Volkov Nikolay <volkovnd@yandex.ru> (https://github.com/volkovnd/)",
+  "bugs": {
+    "url": "https://github.com/volkovnd/initial/issues"
+  },
+  "homepage": "https://github.com/volkovnd/initial#readme"
 }
