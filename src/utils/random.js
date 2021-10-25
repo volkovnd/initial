@@ -10,8 +10,17 @@ export const randomNumber = function (max, min = 0) {
 /**
  *
  * @param {Array} arr
+ * @returns {number}
+ */
+export const randomArrayIndex = function (arr) {
+  return randomNumber(arr.length);
+};
+
+/**
+ *
+ * @param {Array} arr
  * @returns {any}
  */
 export const randomArrayElement = function (arr) {
-  return arr[randomNumber(arr.length)];
+  return arr[randomArrayIndex(arr)];
 };
