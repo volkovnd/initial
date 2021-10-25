@@ -31,7 +31,7 @@ export default {
       default: "div",
     },
   },
-  render: (h, data, props, children) => {
+  render: (h, { data, props, children }) => {
     return h(
       props.tagName,
       mergeData(data, {
