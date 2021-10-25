@@ -1,0 +1,18 @@
+%font-content {
+  font-family: $base-font-family;
+  font-size: $base-font-size;
+  font-weight: $base-font-weight;
+  line-height: $base-line-height;
+  color: $body-color;
+}
+
+%font-heading {
+  font-family: $headings-font-family;
+  font-weight: $headings-font-weight;
+  line-height: $headings-line-height;
+  color: $headings-color;
+}
+
+%transition {
+  transition: all $transition-duration ease-in-out;
+}

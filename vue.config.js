@@ -1,4 +1,4 @@
-const globalStylesImports = ["~@/styles/_variables.scss"];
+const globalStylesImports = ["~@/styles/_variables.scss", "~@/styles/_mixins.scss"];
 
 /** @type {import("@vue/cli-service").ProjectOptions} */
 module.exports = {

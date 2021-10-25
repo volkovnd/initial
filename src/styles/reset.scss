@@ -12,8 +12,15 @@ body {
 }
 
 body {
+  @extend %font-content;
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: $paragraph-margin-bottom;
 }
 
 h1,
@@ -22,5 +29,8 @@ h3,
 h4,
 h5,
 h6 {
+  @extend %font-heading;
+
   margin-top: 0;
+  margin-bottom: $headings-margin-bottom;
 }
