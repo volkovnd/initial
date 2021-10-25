@@ -3,7 +3,7 @@ import { registerComponents } from "@/utils/components";
 
 const context = require.context("@/components", true, /v-[\w-]+\.vue$/);
 
-const components = context
+export const components = context
   .keys()
   .map((fileName) => ({
     name: pascalCase(prepareFileName(fileName)),
