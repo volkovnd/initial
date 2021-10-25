@@ -12,7 +12,7 @@ to: "src/views/<%= h.changeCase.kebab(name) %>.vue"
 </template>
 
 <script>
-import DefaultLayout from "@/layouts/index.vue";
+import DefaultLayout from "@/layout/index.vue";
 
 export default {
   name: "<%= importName %>",
