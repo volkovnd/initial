@@ -1,2 +1,15 @@
+$black: #000;
+$white: #fff;
+
+$dark: lighten($black, 30%);
+$light: darken($white, 30%);
+
+$green: #0c6c0a;
+
 $gutter: 16px;
 $container-max-width: 1000px;
+
+$body-color: $dark;
+
+$link-color: $green;
+$link-active-color: darken($green, 20%);
