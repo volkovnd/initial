@@ -1,5 +1,5 @@
 ---
-to: "src/layouts/<%= h.changeCase.kebab(name) %>.vue"
+to: "src/layout/<%= h.changeCase.kebab(name) %>.vue"
 ---
 <%
   const fileName = h.changeCase.kebab(name)
