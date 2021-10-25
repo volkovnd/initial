@@ -6,7 +6,7 @@ const context = require.context("@/components", true, /v-[\w-]+\.vue$/);
 export const components = context
   .keys()
   .map((fileName) => ({
-    name: pascalCase(prepareFileName(fileName)),
+    name: pascalCase(prepareFileName(fileName, true)),
     config: context(fileName).default,
   }))
   .reduce(
