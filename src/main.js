@@ -3,11 +3,13 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 
-import { GlobalComponentsPlugin } from "@/plugins/global-components";
+import * as plugins from "@/plugins";
+
+import { registerPlugins } from "@/utils/plugins";
 
 Vue.config.productionTip = false;
 
-Vue.use(GlobalComponentsPlugin);
+registerPlugins(Vue, plugins);
 
 new Vue({
   router,
