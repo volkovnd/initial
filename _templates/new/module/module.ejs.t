@@ -1,5 +1,5 @@
 ---
-to: "src/components/<%= h.changeCase.kebab(name) %>.vue"
+to: "src/store/modules/<%= h.changeCase.kebab(name) %>.js"
 ---
 const state = () => ({});
 
