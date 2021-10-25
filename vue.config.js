@@ -22,6 +22,26 @@ module.exports = {
     config.mode = "development";
 
     config.performance.hints(config.mode === "production" ? "warning" : false);
+
+    config.module
+      .rule("vue")
+      .use("vue-loader")
+      .tap((options) => {
+        const transformAssetUrls = options.transformAssetUrls || {};
+        return {
+          ...options,
+          transformAssetUrls: {
+            video: ["src", "poster"],
+            source: "src",
+            img: "src",
+            image: "xlink:href",
+            use: "href",
+            ...transformAssetUrls,
+            "v-img": "src",
+            VImg: "src",
+          },
+        };
+      });
   },
 
   configureWebpack: (config) => {
