@@ -1,5 +1,5 @@
-import kebabCase from "lodash/kebabCase";
-import camelCase from "lodash/camelCase";
+import { default as kebabCase } from "lodash/kebabCase";
+import { default as camelCase } from "lodash/camelCase";
 
 /**
  * Upper first char
