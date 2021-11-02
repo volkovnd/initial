@@ -18,6 +18,16 @@ npm run serve
 npm run build
 ```
 
+### Genarators
+
+For example generate new component
+
+```
+npm run new component
+```
+
+Also available generators for layouts, views, routes, modules, components, utils and etc
+
 ### Lints and fixes files
 
 ```
