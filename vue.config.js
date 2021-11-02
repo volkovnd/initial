@@ -1,4 +1,4 @@
-const globalStylesImports = ["~@/styles/_variables.scss", "~@/styles/_mixins.scss"];
+const globalStylesImports = ["~@/styles/_variables.scss", "~@/styles/_mixins.scss"].map((p) => `@import "${p}"`);
 
 /** @type {import("@vue/cli-service").ProjectOptions} */
 module.exports = {
@@ -10,16 +10,16 @@ module.exports = {
 
     loaderOptions: {
       sass: {
-        additionalData: globalStylesImports.map((p) => `@import "${p}"`).join("\n"),
+        additionalData: globalStylesImports.join("\n"),
       },
       scss: {
-        additionalData: [...globalStylesImports.map((p) => `@import "${p}"`), ""].join(";\n"),
+        additionalData: [...globalStylesImports, ""].join(";\n"),
       },
     },
   },
 
   chainWebpack: (config) => {
-    config.mode = "development";
+    config.mode(process.env.NODE_ENV ? process.env.NODE_ENV : "development");
 
     config.performance.hints(config.mode === "production" ? "warning" : false);
 
