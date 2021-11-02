@@ -9,6 +9,7 @@ const api = axios.create({
   },
 });
 
+// eslint-disable-next-line no-unused-vars
 const apiRequest = function (path, method = "get", data = {}) {
   return new Promise((resolve, reject) => {
     api
