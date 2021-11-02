@@ -7,9 +7,9 @@ to: "src/layout/<%= h.changeCase.kebab(name) %>.vue"
   const className = h.changeCase.kebab(name)
 %><template>
   <div class="<%= className %>">
-    <VContainer>
+    <v-container>
       <slot />
-    </VContainer>
+    </v-container>
   </div>
 </template>
 
