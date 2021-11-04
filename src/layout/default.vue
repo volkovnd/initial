@@ -4,9 +4,9 @@
     <AppMenu />
 
     <main id="page-main">
-      <VContainer>
+      <v-container>
         <slot></slot>
-      </VContainer>
+      </v-container>
     </main>
   </div>
 </template>

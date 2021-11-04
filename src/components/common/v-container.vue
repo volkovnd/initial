@@ -9,27 +9,23 @@ export default {
       type: String,
       default: "div",
     },
+    fluid: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   render: (h, { data, props, children }) => {
     return h(
       props.tagName,
       mergeData(data, {
-        staticClass: "container",
+        class: {
+          container: !props.fluid,
+          "container-fluid": props.fluid,
+        },
       }),
       children
     );
   },
 };
 </script>
-
-<style lang="scss">
-.container {
-  width: 100%;
-  max-width: $container-max-width;
-  padding-right: $gutter;
-  padding-left: $gutter;
-  margin-right: auto;
-  margin-left: auto;
-}
-</style>

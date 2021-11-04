@@ -1,7 +1,7 @@
 <template>
   <header id="page-header">
-    <VContainer>
-      <VImg src="~@/assets/logo.png" />
-    </VContainer>
+    <v-container>
+      <v-img src="~@/assets/logo.png" />
+    </v-container>
   </header>
 </template>

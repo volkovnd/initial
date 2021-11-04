@@ -1,4 +1,9 @@
-const globalStylesImports = ["~@/styles/_variables.scss", "~@/styles/_mixins.scss"].map((p) => `@import "${p}"`);
+const globalStylesImports = [
+  "~bootstrap/scss/_functions.scss",
+  "~bootstrap/scss/_variables.scss",
+  "~@/scss/vendor/bootstrap/_custom.scss",
+  "~bootstrap/scss/_mixins.scss",
+].map((path) => `@import "${path}"`);
 
 /** @type {import("@vue/cli-service").ProjectOptions} */
 module.exports = {
@@ -19,7 +24,7 @@ module.exports = {
   },
 
   chainWebpack: (config) => {
-    config.mode(process.env.NODE_ENV ? process.env.NODE_ENV : "development");
+    config.mode(process.env.NODE_ENV === "production" ? "production" : "development");
 
     config.performance.hints(config.mode === "production" ? "warning" : false);
 
@@ -46,6 +51,7 @@ module.exports = {
       .use("vue-loader")
       .tap((options) => {
         const transformAssetUrls = options.transformAssetUrls || {};
+
         return {
           ...options,
           transformAssetUrls: {
@@ -56,7 +62,6 @@ module.exports = {
             use: "href",
             ...transformAssetUrls,
             "v-img": "src",
-            VImg: "src",
           },
         };
       });
@@ -71,20 +76,13 @@ module.exports = {
 module.exports.devServer = {
   host: process.env.HOST || "0.0.0.0",
   port: process.env.PORT || 8080,
-  useLocalIp: true,
-  open: true,
-  compress: true,
   transportMode: {
     client: "ws",
     server: "ws",
   },
-  clientLogLevel: "none",
   headers: {
     "Access-Control-Allow-Origin": "*",
   },
-  hot: true,
-  noInfo: true,
-
   before: (app) => {
     require("./devServer")(app);
   },

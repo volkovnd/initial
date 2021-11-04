@@ -5,14 +5,17 @@ import store from "./store";
 
 import App from "./App.vue";
 
-import { WebFontsPlugin } from "@/plugins/web-fonts";
-import { GlobalComponentsPlugin } from "@/plugins/global-components";
-
-import { registerPlugins } from "@/utils/plugins";
+import WebFontsPlugin from "@/plugins/web-fonts";
+import GlobalComponentsPlugin from "@/plugins/global-components";
 
 Vue.config.productionTip = false;
 
-registerPlugins(Vue, [WebFontsPlugin, GlobalComponentsPlugin]);
+Vue.use(GlobalComponentsPlugin);
+Vue.use(WebFontsPlugin, {
+  google: {
+    families: ["Open Sans:400,500,700:cyrillic,latin"],
+  },
+});
 
 new Vue({
   el: "#app",

@@ -1,29 +1,26 @@
-import { pascalCase, prepareFileName } from "@/utils/string";
-import { registerComponents } from "@/utils/components";
+import "@/scss/vendor/bootstrap/index.scss";
 
-const loadComponents = (context) => {
-  return context
-    .keys()
-    .map((key) => ({
-      key,
-      name: pascalCase(prepareFileName(key, true)),
-    }))
-    .reduce(
-      (components, { key, name }) => ({
-        [name]: context(key).default,
+import { pascalCase } from "@/utils/string";
 
-        ...components,
-      }),
-      {}
-    );
-};
+const context = require.context("@/components", true, /v-[\w-]+\.(vue|js)$/);
 
-const components = loadComponents(require.context("@/components", true, /v-[\w-]+\.vue$/));
+const components = context
+  .keys()
+  .map((key) => ({
+    key,
+    name: pascalCase(key.replace(/^\..*\//, "").replace(/\.[\w]+$/, "")),
+  }))
+  .reduce(
+    (components, { key, name }) => ({
+      [name]: context(key).default,
 
-const install = function (Vue) {
-  registerComponents(Vue, components);
-};
+      ...components,
+    }),
+    {}
+  );
 
-export const GlobalComponentsPlugin = {
-  install,
-};
+export default function (Vue) {
+  for (const component in components) {
+    Vue.component(component, components[component]);
+  }
+}

@@ -30,7 +30,7 @@ export default {
           alt: props.alt,
         },
         class: {
-          "img-block": props.block,
+          "d-block w-100": props.block,
         },
       }),
       children
@@ -38,11 +38,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-.img-block {
-  display: block;
-  max-width: 100%;
-  height: auto;
-}
-</style>

@@ -13,6 +13,18 @@ export default {
       type: Boolean,
       default: false,
     },
+    alignV: {
+      type: String,
+      default: null,
+    },
+    alignH: {
+      type: String,
+      default: null,
+    },
+    noGutters: {
+      type: Boolean,
+      default: false,
+    },
   },
   render: (h, { data, props, children }) => {
     return h(
@@ -20,7 +32,10 @@ export default {
       mergeData(data, {
         staticClass: "row",
         class: {
-          "row-column": props.column,
+          "flex-column": props.column,
+          [`align-items-${props.alignV}`]: !!props.alignV,
+          [`justify-content-${props.alignH}`]: !!props.alignH,
+          "no-gutters": props.noGutters,
         },
       }),
       children
@@ -28,16 +43,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  margin-right: -$gutter;
-  margin-left: -$gutter;
-
-  &-column {
-    flex-direction: column;
-  }
-}
-</style>

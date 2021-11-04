@@ -1,6 +1,5 @@
 <template>
   <router-link
-    class="link"
     :to="linkTo"
     :active-class="activeClass"
     :exact-active-class="exactActiveClass"
@@ -43,14 +42,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-.link {
-  color: $link-color;
-  text-decoration: none;
-
-  &.active {
-    color: $link-active-color;
-  }
-}
-</style>
