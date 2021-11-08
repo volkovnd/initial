@@ -4,6 +4,7 @@
     :class="{
       [`navbar-${variant}`]: !!variant,
       [`navbar-expand-${expand}`]: !!expand,
+      [`bg-${bg}`]: !!bg,
     }"
   >
     <slot />
@@ -14,6 +15,10 @@
 export default {
   name: "VNavbar",
   props: {
+    bg: {
+      type: String,
+      default: null,
+    },
     variant: {
       type: String,
       default: null,

@@ -6,16 +6,14 @@
       </v-container>
     </header>
 
-    <nav id="page-nav" class="bg-dark">
-      <v-navbar variant="dark" expand="md">
-        <v-container>
-          <v-nav is-navbar>
-            <v-nav-item to="/">Home</v-nav-item>
-            <v-nav-item to="/about">About</v-nav-item>
-          </v-nav>
-        </v-container>
-      </v-navbar>
-    </nav>
+    <v-navbar variant="dark" bg="dark" expand="md">
+      <v-container>
+        <v-navbar-nav>
+          <v-nav-item to="/">Home</v-nav-item>
+          <v-nav-item to="/about">About</v-nav-item>
+        </v-navbar-nav>
+      </v-container>
+    </v-navbar>
 
     <main id="page-main">
       <v-container>
