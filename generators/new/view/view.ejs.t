@@ -2,22 +2,17 @@
 to: "src/views/<%= h.changeCase.kebab(name) %>.vue"
 ---
 <%
-  const fileName = h.changeCase.kebab(name)
-  const importName = h.changeCase.pascal(fileName)
+  const componentName = h.changeCase.kebab(name).replace(/-?view$/i, "") + '-view';
+  const importName = h.changeCase.pascal(componentName)
   const titleName = h.changeCase.title(name)
 %><template>
-  <DefaultLayout>
+  <div>
     <h1><%= titleName %></h1>
-  </DefaultLayout>
+  </div>
 </template>
 
 <script>
-import DefaultLayout from "@/layout/index.vue";
-
 export default {
   name: "<%= importName %>",
-  components: {
-    DefaultLayout,
-  },
 };
 </script>
