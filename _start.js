@@ -52,9 +52,11 @@ replaceFile("package.json", (str) =>
 );
 
 // Replace title in .env.example to correct
-replaceFile(".env.example", (str) => str.replace(/VUE_APP_TITLE=[\w -_]+\n/, `VUE_APP_TITLE=${projectTitle}\n`));
+replaceFile(".env.example", (str) =>
+  str.replace(/VUE_APP_TITLE=[\w -_]+\n/, `VUE_APP_TITLE=${_.startCase(projectTitle)}\n`)
+);
 
 // Replace title in README.md to correct
-replaceFile("README.md", (str) => str.replace(/#[\w -_]+\n/, `# ${projectTitle}\n`));
+replaceFile("README.md", (str) => str.replace(/#[\w -_]+\n/, `# ${_.startCase(projectTitle)}\n`));
 
 createEnv("development", true);
