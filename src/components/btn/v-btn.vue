@@ -5,10 +5,6 @@ export default {
   name: "VBtn",
   functional: true,
   props: {
-    tagName: {
-      type: String,
-      default: "button",
-    },
     type: {
       type: String,
       default: "type",
@@ -21,13 +17,25 @@ export default {
       type: String,
       default: null,
     },
+    link: {
+      type: Boolean,
+      default: false,
+    },
   },
   render: (h, { data, props, children }) => {
+    const tagName = props.link ? "v-link" : "button";
+
     return h(
-      props.tagName,
+      tagName,
       mergeData(data, {
         attrs: {
           type: props.type,
+
+          ...(props.link
+            ? {
+                role: "button",
+              }
+            : {}),
         },
         staticClass: "btn",
         class: {
