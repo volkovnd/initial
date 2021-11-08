@@ -1,3 +1,3 @@
-import { default as omit } from "lodash/omit";
+const omit = require("lodash/omit");
 
 export { omit };

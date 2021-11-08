@@ -1,21 +1,35 @@
-import { default as kebabCase } from "lodash/kebabCase";
-import { default as camelCase } from "lodash/camelCase";
+const camelCase = require("lodash/camelCase");
+const kebabCase = require("lodash/kebabCase");
 
 /**
  * Upper first char
  *
- * @param {string} str
- * @returns {string}
+ * @param {string} str The string to convert.
+ * @return {string}
+ * @example
+ *
+ * upperFirst('foo bar');
+ * // => 'Foo bar'
  */
 const upperFirst = function (str) {
   return `${str.charAt(0).toUpperCase()}${str.slice(1)}`;
 };
 
 /**
- * Pascal case test-title => TestTitle
+ * Converts `string` to [pascal case](https://en.wikipedia.org/wiki/CamelCase).
  *
- * @param {string} str
+ * @param {string} str The string to convert.
  * @returns {string}
+ * @example
+ *
+ * pascalCase('Foo Bar');
+ * // => 'FooBar'
+ *
+ * pascalCase('--foo-bar--');
+ * // => 'FooBar'
+ *
+ * pascalCase('__FOO_BAR__');
+ * // => 'FooBar'
  */
 const pascalCase = function (str) {
   return upperFirst(camelCase(str));
