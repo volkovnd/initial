@@ -1,4 +1,4 @@
-# initial-template
+# Initial template
 
 ## Project setup
 

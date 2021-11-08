@@ -45,10 +45,10 @@ function createEnv(mode = "development", local = false) {
   fs.writeFileSync(resolve(`.env.${mode}${local ? ".local" : ""}`), output);
 }
 
-const projectTitle = "Test title";
+const projectTitle = process.env.name || "Project title";
 
 replaceFile("package.json", (str) =>
-  str.replace(/"name": "[\w/@-_]+",\n/, `"name": "${_.kebabCase(projectTitle)}",\n`)
+  str.replace(/"name": "[\w@\//_\-]+",\n/, `"name": "${_.kebabCase(projectTitle)}",\n`)
 );
 
 // Replace title in .env.example to correct
