@@ -37,7 +37,7 @@ export default {
       mergeData(data, {
         staticClass: "<%= className %>",
       }),
-      children,
+      children
     );
   },
 };
