@@ -34,29 +34,36 @@ function replaceFile(fileName, fn) {
   fs.writeFileSync(p, output);
 }
 
-/**
- *
- * @param {string} [mode='development']
- * @param {boolean} [local=false]
- */
-function createEnv(mode = "development", local = false) {
-  const output = readFile(resolve(".env.example"));
+// /**
+//  * Delete file
+//  *
+//  * @param {string} fileName
+//  */
+// function deleteFile(fileName) {
+//   fs.rmSync(resolve(fileName));
+// }
 
-  fs.writeFileSync(resolve(`.env.${mode}${local ? ".local" : ""}`), output);
-}
+// /**
+//  *
+//  * @param {string} [mode='development']
+//  * @param {boolean} [local=false]
+//  */
+// function createEnv(mode = "development", local = false) {
+//   const output = readFile(resolve(".env.example"));
+
+//   fs.writeFileSync(resolve(`.env.${mode}${local ? ".local" : ""}`), output);
+// }
 
 const projectTitle = process.env.name || "Project title";
 
-replaceFile("package.json", (str) =>
-  str.replace(/"name": "[\w@\//_\-]+",\n/, `"name": "${_.kebabCase(projectTitle)}",\n`)
-);
+const envFiles = [".env.example", ".env.production", ".env.development"];
 
-// Replace title in .env.example to correct
-replaceFile(".env.example", (str) =>
-  str.replace(/VUE_APP_TITLE=[\w -_]+\n/, `VUE_APP_TITLE=${_.startCase(projectTitle)}\n`)
-);
+// Replace title in .env.* to correct
+envFiles.forEach((envFile) => {
+  replaceFile(envFile, (str) =>
+    str.replace(/VUE_APP_TITLE=[\w -_]+\n/, `VUE_APP_TITLE=${_.upperFirst(_.lowerCase(projectTitle))}\n`)
+  );
+});
 
 // Replace title in README.md to correct
-replaceFile("README.md", (str) => str.replace(/#[\w -_]+\n/, `# ${_.startCase(projectTitle)}\n`));
-
-createEnv("development", true);
+replaceFile("README.md", (str) => str.replace(/# [\w -_]+\n/, `# ${_.upperFirst(_.lowerCase(projectTitle))}\n`));
