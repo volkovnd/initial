@@ -1,9 +1,9 @@
 const globalStylesImports = [
-  "~bootstrap/scss/_functions.scss",
-  "~bootstrap/scss/_variables.scss",
-  "~@/scss/vendor/bootstrap/_custom.scss",
-  "~bootstrap/scss/_mixins.scss",
-].map((path) => `@import "${path}"`);
+  '@import "~bootstrap/scss/_functions.scss"',
+  '@import "~@/scss/vendor/bootstrap/_custom.scss"',
+  '@import "~bootstrap/scss/_variables.scss"',
+  '@import "~bootstrap/scss/_mixins.scss"',
+];
 
 /** @type {import("@vue/cli-service").ProjectOptions} */
 module.exports = {
@@ -24,8 +24,6 @@ module.exports = {
   },
 
   chainWebpack: (config) => {
-    config.mode(process.env.NODE_ENV === "production" ? "production" : "development");
-
     config.performance.hints(config.mode === "production" ? "warning" : false);
 
     const oldSvg = config.module.rule("svg").uses.get("file-loader");
