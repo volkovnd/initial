@@ -15,7 +15,7 @@
       </v-container>
     </v-navbar>
 
-    <main id="page-main">
+    <main id="main">
       <v-container>
         <RouterView :key="$route.fullPath" />
       </v-container>
