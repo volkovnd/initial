@@ -26,24 +26,6 @@ module.exports = {
   chainWebpack: (config) => {
     config.performance.hints(config.mode === "production" ? "warning" : false);
 
-    const oldSvg = config.module.rule("svg").uses.get("file-loader");
-
-    config.module
-      .rule("svg")
-      .uses.clear()
-      .end()
-      .oneOf("vue-svg-loader")
-      .resourceQuery(/component/)
-      .use("babel-loader")
-      .loader(require.resolve("babel-loader"))
-      .end()
-      .use("vue-svg-loader")
-      .loader(require.resolve("vue-svg-loader"))
-      .end()
-      .end()
-      .oneOf("file-loader")
-      .uses.set("file-loader", oldSvg);
-
     config.module
       .rule("vue")
       .use("vue-loader")

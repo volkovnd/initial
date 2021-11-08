@@ -1,12 +1,20 @@
 const express = require("express");
 
+function createJSONServer(data) {
+  const jsonServer = require("json-server");
+
+  const server = jsonServer.create();
+  const router = jsonServer.router(data);
+  const middlewares = jsonServer.defaults();
+
+  server.use(middlewares);
+  server.use(router);
+
+  return server;
+}
+
 module.exports = (app) => {
   app.use(express.json());
 
-  if (process.env.CREATE_JSON_SERVER === true || process.env.CREATE_JSON_SERVER === "true") {
-    const createJSONServer = require("@vue/cli-test-utils/createJSONServer.js");
-    const db = require("./tests/fixtures");
-
-    app.use("/api", createJSONServer(db));
-  }
+  app.use("/api", createJSONServer("db.json"));
 };
