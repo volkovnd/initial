@@ -1,11 +1,5 @@
-export const loadRoutes = () => {
-  const context = require.context("./routes", true, /\.js$/);
+const context = require.context("./routes", true, /\.js$/);
 
-  const routes = context.keys().reduce((routes, fileName) => {
-    const route = context(fileName).default;
+const routes = context.keys().map((key) => context(key).default);
 
-    return [...routes, route];
-  }, []);
-
-  return routes;
-};
+export default routes;

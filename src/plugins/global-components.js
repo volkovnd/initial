@@ -1,5 +1,3 @@
-import "@/scss/vendor/bootstrap/index.scss";
-
 import { pascalCase } from "@/utils/string";
 
 const context = require.context("@/components", true, /v-[\w-]+\.(vue|js)$/);

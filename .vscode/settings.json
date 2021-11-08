@@ -37,7 +37,7 @@
   "eslint.validate": ["javascript", "javascriptreact", "vue"],
 
   "stylelint.enable": true,
-  "stylelint.validate": ["css", "postcss", "scss", "vue", "vue-postcss"],
+  "stylelint.validate": ["css", "scss", "vue"],
 
   "javascript.format.enable": false,
   "typescript.format.enable": false,

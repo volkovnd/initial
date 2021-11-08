@@ -76,13 +76,7 @@ module.exports = {
 module.exports.devServer = {
   host: process.env.HOST || "0.0.0.0",
   port: process.env.PORT || 8080,
-  transportMode: {
-    client: "ws",
-    server: "ws",
-  },
-  headers: {
-    "Access-Control-Allow-Origin": "*",
-  },
+  transportMode: "ws",
   before: (app) => {
     require("./devServer")(app);
   },
