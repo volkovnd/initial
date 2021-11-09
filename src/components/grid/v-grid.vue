@@ -29,7 +29,7 @@ export default {
         staticClass: "grid",
         style: {
           "--bs-columns": props.columns,
-          "--bs-rows": props.columns,
+          "--bs-rows": props.rows,
           "--bs-gap": props.gap,
         },
       }),
