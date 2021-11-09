@@ -1,9 +1,18 @@
-<script>
-import { mergeData } from "vue-functional-data-merge";
+<template>
+  <input
+    :type="type"
+    class="form-control"
+    :class="{ [`form-control-${size}`]: !!size }"
+    v-bind="$attrs"
+    @input="onInput($event)"
+    @change="onChange($event)"
+  />
+</template>
 
+<script>
 export default {
   name: "VFormControl",
-  functional: true,
+  inheritAttrs: false,
   props: {
     type: {
       type: String,
@@ -14,17 +23,14 @@ export default {
       default: null,
     },
   },
-  render: (h, { data, props, children }) => {
-    return h(
-      "input",
-      mergeData(data, {
-        staticClass: "form-control",
-        class: {
-          [`form-control-${props.size}`]: !!props.size,
-        },
-      }),
-      children
-    );
+
+  methods: {
+    onInput(event) {
+      this.$emit("input", event.target.value);
+    },
+    onChange(event) {
+      this.$emit("change", event.target.value);
+    },
   },
 };
 </script>
