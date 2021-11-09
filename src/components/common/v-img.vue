@@ -16,7 +16,11 @@ export default {
       type: String,
       required: true,
     },
-    block: {
+    fluid: {
+      type: Boolean,
+      default: false,
+    },
+    thumbnail: {
       type: Boolean,
       default: false,
     },
@@ -30,7 +34,8 @@ export default {
           alt: props.alt,
         },
         class: {
-          "d-block w-100": props.block,
+          "img-fluid": props.fluid,
+          "img-thumbnail": props.thumbnail,
         },
       }),
       children
