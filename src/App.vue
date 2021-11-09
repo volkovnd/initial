@@ -6,7 +6,7 @@
       </v-container>
     </header>
 
-    <v-navbar variant="dark" bg="dark" expand="md">
+    <v-navbar variant="dark" bg-variant="dark" expand="md">
       <v-container>
         <v-navbar-nav>
           <v-nav-item to="/">Home</v-nav-item>
