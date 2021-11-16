@@ -12,13 +12,11 @@ export default [
     path: "/posts/:id",
     name: "post",
     component: () => import(/* webpackChunkName: "post" */ "@/views/post.vue"),
-
     props: true,
   },
   {
     path: "/about",
     name: "about",
-
     component: () => import(/* webpackChunkName: "about" */ "@/views/about.vue"),
   },
 ];

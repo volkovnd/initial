@@ -1,6 +1,6 @@
 import { PostsService } from "@/api";
-import { FETCH_POSTS } from "./actions.type";
-import { FETCH_START, FETCH_END, UPDATE_POST_IN_LIST } from "./mutations.type";
+import { FETCH_POSTS } from "@/store/types/actions";
+import { FETCH_START, FETCH_END, UPDATE_POST_IN_LIST } from "@/store/types/mutations";
 
 const initialState = {
   isLoading: true,

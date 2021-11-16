@@ -20,7 +20,7 @@
 <script>
 import { mapGetters } from "vuex";
 import PostListPreview from "./list-preview.vue";
-import { FETCH_POSTS } from "@/store/actions.type";
+import { FETCH_POSTS } from "@/store/types/actions";
 
 export default {
   name: "PostsList",
@@ -50,15 +50,7 @@ export default {
       };
     },
 
-    pages() {
-      if (this.isLoading || this.postsCount <= this.itemPerPage) {
-        return [];
-      }
-
-      return [...Array(Math.ceil(this.postsCount / this.itemPerPage)).keys()].map((e) => e + 1);
-    },
-
-    ...mapGetters(["postsCount", "isLoading", "posts"]),
+    ...mapGetters(["isLoading", "posts"]),
   },
   mounted() {
     this.fetchPosts();

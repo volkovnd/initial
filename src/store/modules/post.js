@@ -1,6 +1,6 @@
 import { PostsService } from "@/api";
-import { FETCH_POST, POST_EDIT, POST_DELETE, POST_RESET_STATE } from "@/store/actions.type";
-import { RESET_STATE, SET_POST } from "@/store/mutations.type";
+import { FETCH_POST, POST_EDIT, POST_DELETE, POST_RESET_STATE } from "@/store/types/actions";
+import { RESET_STATE, SET_POST } from "@/store/types/mutations";
 
 const initialState = {
   post: {

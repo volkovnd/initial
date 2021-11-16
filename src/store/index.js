@@ -1,8 +1,8 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
-import post from "@/store/post.module";
-import posts from "@/store/posts.module";
+import post from "@/store/modules/post";
+import posts from "@/store/modules/posts";
 
 Vue.use(Vuex);
 

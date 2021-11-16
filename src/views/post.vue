@@ -17,11 +17,10 @@
 <script>
 import store from "@/store";
 import { mapGetters } from "vuex";
-import { FETCH_POST } from "@/store/actions.type";
+import { FETCH_POST } from "@/store/types/actions";
 
 export default {
   name: "PostView",
-  components: {},
   beforeRouteEnter(to, from, next) {
     store.dispatch(FETCH_POST, to.params.id).then(() => {
       next();
