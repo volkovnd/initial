@@ -1,6 +1,6 @@
 import { PostsService } from "@/api";
-import { FETCH_POST, POST_EDIT, POST_DELETE, POST_RESET_STATE } from "@/store/types/actions";
-import { RESET_STATE, SET_POST } from "@/store/types/mutations";
+import { FETCH_POST, POST_EDIT, POST_DELETE, POST_RESET_STATE, POST_CREATE } from "@/store/types/actions";
+import { RESET_STATE, SET_POST, DELETE_POST_IN_LIST } from "@/store/types/mutations";
 
 const initialState = {
   post: {
@@ -22,14 +22,27 @@ export const actions = {
 
     return data;
   },
-  [POST_DELETE](context, postId) {
-    return PostsService.destroy(postId);
+
+  async [POST_DELETE]({ commit }, postId) {
+    await PostsService.destroy(postId);
+
+    commit(DELETE_POST_IN_LIST, postId);
   },
-  [POST_EDIT]({ state }) {
-    return PostsService.update(state.post.id, state.post);
+
+  async [POST_EDIT]({ state }) {
+    const data = await PostsService.update(state.post.id, state.post);
+
+    return data;
   },
+
   [POST_RESET_STATE]({ commit }) {
     commit(RESET_STATE);
+  },
+
+  async [POST_CREATE]({ state }) {
+    const data = await PostsService.create(state.post);
+
+    return data;
   },
 };
 

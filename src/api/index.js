@@ -51,9 +51,7 @@ export const PostsService = {
   },
 
   create(params) {
-    return ApiService.post("posts", {
-      post: params,
-    });
+    return ApiService.post("posts", params);
   },
 
   update(postId, params) {

@@ -9,6 +9,11 @@ export default [
     component: () => import(/* webpackChunkName: "posts" */ "@/views/posts.vue"),
   },
   {
+    path: "/posts/create",
+    name: "posts-create",
+    component: () => import(/* webpackChunkName: "post-add" */ "@/views/posts-create.vue"),
+  },
+  {
     path: "/posts/:id",
     name: "post",
     component: () => import(/* webpackChunkName: "post" */ "@/views/post.vue"),

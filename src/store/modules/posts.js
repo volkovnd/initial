@@ -1,6 +1,6 @@
 import { PostsService } from "@/api";
 import { FETCH_POSTS } from "@/store/types/actions";
-import { FETCH_START, FETCH_END, UPDATE_POST_IN_LIST } from "@/store/types/mutations";
+import { FETCH_START, FETCH_END, UPDATE_POST_IN_LIST, DELETE_POST_IN_LIST } from "@/store/types/mutations";
 
 const initialState = {
   isLoading: true,
@@ -44,6 +44,11 @@ const mutations = {
       }
 
       return post;
+    });
+  },
+  [DELETE_POST_IN_LIST](state, postId) {
+    state.posts = state.posts.filter((post) => {
+      return post.id !== postId;
     });
   },
 };

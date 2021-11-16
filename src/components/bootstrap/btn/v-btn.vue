@@ -17,31 +17,20 @@ export default {
       type: String,
       default: null,
     },
-    link: {
-      type: Boolean,
-      default: false,
-    },
   },
+
   render: (h, { data, props, children }) => {
-    const tagName = props.link ? "v-link" : "button";
+    const computedSizeClass = [props.size ? `btn-${props.size}` : null];
+    const computedVariantClass = [props.variant ? `btn-${props.variant}` : null];
 
     return h(
-      tagName,
+      "button",
       mergeData(data, {
         attrs: {
           type: props.type,
-
-          ...(props.link
-            ? {
-                role: "button",
-              }
-            : {}),
         },
         staticClass: "btn",
-        class: {
-          [`btn-${props.variant}`]: !!props.variant,
-          [`btn-${props.size}`]: !!props.size,
-        },
+        class: [computedVariantClass, computedSizeClass],
       }),
       children
     );
