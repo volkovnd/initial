@@ -1,19 +1,7 @@
 <template>
   <div id="app">
-    <header id="page-header">
-      <v-container>
-        <v-img src="~@/assets/logo.png" />
-      </v-container>
-    </header>
-
-    <v-navbar variant="dark" bg-variant="dark" expand="md">
-      <v-container>
-        <v-navbar-nav>
-          <v-nav-item to="/">Home</v-nav-item>
-          <v-nav-item to="/about">About</v-nav-item>
-        </v-navbar-nav>
-      </v-container>
-    </v-navbar>
+    <AppHeader />
+    <AppNav />
 
     <main id="main">
       <v-container>
@@ -24,7 +12,14 @@
 </template>
 
 <script>
+import AppHeader from "@/layout/header.vue";
+import AppNav from "@/layout/nav.vue";
+
 export default {
   name: "App",
+  components: {
+    AppHeader,
+    AppNav,
+  },
 };
 </script>
