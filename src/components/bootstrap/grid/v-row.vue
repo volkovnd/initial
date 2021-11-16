@@ -27,16 +27,16 @@ export default {
     },
   },
   render: (h, { data, props, children }) => {
+    const computedDirectionClass = [props.column ? "flex-column" : null];
+    const computedAlignItemsClass = [props.alignV ? `align-items-${props.alignV}` : null];
+    const computedJustifyContentClass = [props.alignH ? `justify-content-${props.alignH}` : null];
+    const computedGuttersClass = [props.noGutters ? `no-gutters` : null];
+
     return h(
       props.tagName,
       mergeData(data, {
         staticClass: "row",
-        class: {
-          "flex-column": props.column,
-          [`align-items-${props.alignV}`]: !!props.alignV,
-          [`justify-content-${props.alignH}`]: !!props.alignH,
-          "no-gutters": props.noGutters,
-        },
+        class: [computedDirectionClass, computedAlignItemsClass, computedJustifyContentClass, computedGuttersClass],
       }),
       children
     );

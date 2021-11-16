@@ -5,7 +5,13 @@ export const axiosClient = axios.create({
   baseURL: API_BASE_URL,
 });
 
-const ApiService = {
+export const ApiService = {
+  query(resource, params) {
+    return axiosClient.get(resource, params).catch((error) => {
+      throw new Error(`[RWV] ApiService ${error}`);
+    });
+  },
+
   get(resource, slug = "") {
     return axiosClient.get(`${resource}/${slug}`).catch((error) => {
       throw new Error(`ApiService ${error}`);
@@ -34,6 +40,12 @@ const ApiService = {
 export default ApiService;
 
 export const PostsService = {
+  query(params) {
+    return ApiService.query("posts", {
+      params: params,
+    });
+  },
+
   get(postId) {
     return ApiService.get("posts", postId);
   },

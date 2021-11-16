@@ -9,19 +9,18 @@ export default {
       type: String,
       default: "div",
     },
-    cols: {
+    col: {
       type: [Number, String],
-      default: "",
+      default: null,
     },
   },
   render: (h, { data, props, children }) => {
+    const computedColClass = [props.col != null ? `col${props.col ? "-" + props.col : ""}` : null];
+
     return h(
       props.tagName,
       mergeData(data, {
-        class: {
-          col: props.cols === "",
-          [`col-${props.cols}`]: !!props.cols,
-        },
+        class: [computedColClass],
       }),
       children
     );

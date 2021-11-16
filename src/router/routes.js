@@ -1,8 +1,18 @@
 export default [
   {
     path: "/",
-    name: "home",
-    component: () => import(/* webpackChunkName: "home" */ "@/views/home.vue"),
+    redirect: "/posts",
+  },
+  {
+    path: "/posts",
+    name: "posts",
+    component: () => import(/* webpackChunkName: "posts" */ "@/views/posts.vue"),
+  },
+  {
+    path: "/posts/:id",
+    name: "post",
+    component: () => import(/* webpackChunkName: "post" */ "@/views/post.vue"),
+    props: true,
   },
   {
     path: "/about",

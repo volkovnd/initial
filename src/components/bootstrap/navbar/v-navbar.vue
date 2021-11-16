@@ -1,17 +1,19 @@
-<template>
-  <div class="navbar" :class="computedClasses">
-    <slot />
-  </div>
-</template>
-
 <script>
-import { bgMixin } from "@/mixins/bgVariant";
+import { mergeData } from "vue-functional-data-merge";
 
 export default {
   name: "VNavbar",
-  mixins: [bgMixin],
+  functional: true,
   props: {
+    tagName: {
+      type: String,
+      default: "nav",
+    },
     variant: {
+      type: String,
+      default: null,
+    },
+    bgVariant: {
       type: String,
       default: null,
     },
@@ -20,24 +22,20 @@ export default {
       default: null,
     },
   },
-  computed: {
-    variantClass() {
-      return [this.variant ? `navbar-${this.variant}` : null];
-    },
-    expandClass() {
-      return [this.expand ? `navbar-expand-${this.expand}` : null];
-    },
-    computedClasses() {
-      const classes = [];
+  render: (h, { data, props, children }) => {
+    const computedVariantClass = [props.variant ? `navbar-${props.variant}` : null];
+    const computedBgVariantClass = [props.bgVariant ? `bg-${props.bgVariant}` : null];
+    const computedExpandClass = [
+      props.expand != null ? [`navbar-expand${props.expand ? "-" + props.expand : ""}`] : null,
+    ];
 
-      classes.push(this.variantClass);
-
-      classes.push(this.expandClass);
-
-      classes.push(this.bgVariantClass);
-
-      return classes;
-    },
+    return h(
+      props.tagName,
+      mergeData(data, {
+        class: ["navbar", computedVariantClass, computedBgVariantClass, computedExpandClass],
+      }),
+      children
+    );
   },
 };
 </script>

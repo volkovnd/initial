@@ -1,12 +1,16 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
-import modules from "./modules";
+import posts from "@/store/posts.module";
+import post from "@/store/post.module";
 
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
-  modules,
+  modules: {
+    post,
+    posts,
+  },
 
   strict: process.env.NODE_ENV === "development",
 });

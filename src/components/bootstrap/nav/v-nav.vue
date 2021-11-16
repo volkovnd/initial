@@ -15,13 +15,13 @@ export default {
     },
   },
   render: (h, { data, props, children }) => {
+    const computedDirectionClass = [props.column ? "flex-column" : null];
+
     return h(
       props.tagName,
       mergeData(data, {
         staticClass: "nav",
-        class: {
-          "flex-column": props.column,
-        },
+        class: [computedDirectionClass],
       }),
       children
     );

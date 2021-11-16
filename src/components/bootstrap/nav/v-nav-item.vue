@@ -4,7 +4,7 @@ import { mergeData } from "vue-functional-data-merge";
 export default {
   name: "VNavItem",
   functional: true,
-  render: (h, data, props, children) => {
+  render: (h, { data, children }) => {
     return h(
       "v-link",
       mergeData(data, {

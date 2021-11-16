@@ -2,6 +2,7 @@
 import { mergeData } from "vue-functional-data-merge";
 
 export default {
+  name: "VImg",
   functional: true,
   props: {
     tagName: {
@@ -26,6 +27,9 @@ export default {
     },
   },
   render: (h, { data, props, children }) => {
+    const computedFluidClass = [props.fluid ? "img-fluid" : null];
+    const computedThumbnailClass = [props.thumbnail ? "img-thumbnail" : null];
+
     return h(
       props.tagName,
       mergeData(data, {
@@ -33,10 +37,7 @@ export default {
           src: props.src,
           alt: props.alt,
         },
-        class: {
-          "img-fluid": props.fluid,
-          "img-thumbnail": props.thumbnail,
-        },
+        class: [computedFluidClass, computedThumbnailClass],
       }),
       children
     );

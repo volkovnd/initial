@@ -1,6 +1,6 @@
 <template>
   <router-link
-    :to="linkTo"
+    :to="computedLinkTo"
     :active-class="activeClass"
     :exact-active-class="exactActiveClass"
     v-bind="$attrs"
@@ -13,9 +13,10 @@
 <script>
 export default {
   name: "VLink",
+  inheritAttrs: false,
   props: {
     to: {
-      type: String,
+      type: [String, Object],
       default: null,
     },
     href: {
@@ -32,12 +33,12 @@ export default {
     },
   },
   computed: {
-    linkTo() {
-      return this.to
-        ? this.to
-        : {
-            to: this.href,
-          };
+    computedLinkTo() {
+      if (this.to && typeof this.to !== "string") return this.to;
+
+      return {
+        path: this.to || this.href,
+      };
     },
   },
 };
