@@ -6,17 +6,17 @@ export default [
   {
     path: "/posts",
     name: "posts",
-    component: () => import(/* webpackChunkName: "posts" */ "@/views/posts.vue"),
+    component: () => import(/* webpackChunkName: "posts-list" */ "@/views/posts/index.vue"),
   },
   {
     path: "/posts/create",
     name: "posts-create",
-    component: () => import(/* webpackChunkName: "post-add" */ "@/views/posts-create.vue"),
+    component: () => import(/* webpackChunkName: "posts-create" */ "@/views/posts/create.vue"),
   },
   {
     path: "/posts/:id",
     name: "post",
-    component: () => import(/* webpackChunkName: "post" */ "@/views/post.vue"),
+    component: () => import(/* webpackChunkName: "posts-get" */ "@/views/posts/_id.vue"),
     props: true,
   },
   {
