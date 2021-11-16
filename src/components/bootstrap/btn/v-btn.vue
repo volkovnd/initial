@@ -17,11 +17,15 @@ export default {
       type: String,
       default: null,
     },
+    outline: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   render: (h, { data, props, children }) => {
     const computedSizeClass = [props.size ? `btn-${props.size}` : null];
-    const computedVariantClass = [props.variant ? `btn-${props.variant}` : null];
+    const computedVariantClass = [props.variant ? `btn-${props.outline ? "outline-" : ""}${props.variant}` : null];
 
     return h(
       "button",
