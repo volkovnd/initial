@@ -22,4 +22,3 @@ export default [
     component: () => import(/* webpackChunkName: "about" */ "@/views/about.vue"),
   },
 ];
-Z;
