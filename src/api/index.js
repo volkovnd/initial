@@ -5,6 +5,34 @@ export const axiosClient = axios.create({
   baseURL: API_BASE_URL,
 });
 
+if (process.env.NODE_ENV === "development") {
+  axiosClient.interceptors.request.use((config) => {
+    return new Promise((resolve, reject) => {
+      config.params = config.params || {};
+
+      if (config.filters)
+        config.params = Object.keys(config.filters).reduce(
+          (params, key) => ({
+            [`_${key}`]: config.filters[key],
+            ...params,
+          }),
+          {}
+        );
+
+      resolve(config);
+    });
+  });
+
+  axiosClient.interceptors.response.use((value) => {
+    if (value.headers["x-total-count"]) {
+      value.data.list = value.data;
+      value.data.total = parseInt(value.headers["x-total-count"], 10);
+    }
+
+    return value;
+  });
+}
+
 export const ApiService = {
   query(resource, params) {
     return axiosClient.get(resource, params).catch((error) => {
@@ -41,9 +69,7 @@ export default ApiService;
 
 export const PostsService = {
   query(params) {
-    return ApiService.query("posts", {
-      params: params,
-    });
+    return ApiService.query("posts", params);
   },
 
   get(postId) {

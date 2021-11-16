@@ -6,6 +6,7 @@ const initialState = {
   isLoading: true,
 
   posts: [],
+  totalPosts: 0,
 };
 
 const state = () => ({ ...initialState });
@@ -15,10 +16,16 @@ const actions = {
     try {
       commit(FETCH_START);
 
-      const { data } = await PostsService.query(params.filter);
+      const response = await PostsService.query(params);
+
+      const data = response.data;
+
+      const posts = data.list ? data.list : data;
+      const totalPosts = data.total || null;
 
       commit(FETCH_END, {
-        posts: data,
+        posts,
+        totalPosts,
       });
     } catch (error) {
       throw new Error(error);
@@ -31,8 +38,9 @@ const mutations = {
     state.isLoading = true;
   },
 
-  [FETCH_END](state, { posts }) {
+  [FETCH_END](state, { posts, totalPosts }) {
     state.posts = posts;
+    if (totalPosts) state.totalPosts = totalPosts;
 
     state.isLoading = false;
   },
@@ -50,20 +58,22 @@ const mutations = {
     state.posts = state.posts.filter((post) => {
       return post.id !== postId;
     });
+
+    state.totalPosts = state.totalPosts - 1;
   },
 };
 
 const getters = {
-  postsCount(state) {
-    return state.posts.length;
-  },
-
   posts(state) {
     return state.posts;
   },
 
   isLoading(state) {
     return state.isLoading;
+  },
+
+  totalPosts(state) {
+    return state.totalPosts;
   },
 };
 

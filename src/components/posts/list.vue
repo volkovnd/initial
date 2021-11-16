@@ -9,6 +9,7 @@
         <v-col col>
           <div class="list-heading">Author</div>
         </v-col>
+        <v-col>Всего: {{ totalPosts }}</v-col>
       </v-row>
 
       <div v-if="posts.length === 0" class="post-preview">Nothing to show...</div>
@@ -51,7 +52,7 @@ export default {
       };
     },
 
-    ...mapGetters(["isLoading", "posts"]),
+    ...mapGetters(["isLoading", "posts", "totalPosts"]),
   },
   mounted() {
     this.fetchPosts();
