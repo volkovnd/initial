@@ -1,38 +1,73 @@
 import axios from "axios";
+import { API_BASE_URL } from "@/config";
 
-const api = axios.create({
-  baseURL: process.env.VUE_APP_API_BASE_URL || "/api",
-  headers: {
-    "Content-Type": "application/json",
-  },
+export const axiosClient = axios.create({
+  baseURL: API_BASE_URL,
 });
 
-// eslint-disable-next-line no-unused-vars
-const apiRequest = function (path, method = "get", data = {}) {
-  return new Promise((resolve, reject) => {
-    api
-      .request({
-        url: path,
-        method,
-        ...(method === "get"
-          ? {
-              params: data,
-            }
-          : {
-              data,
-            }),
-      })
-      .then((response) => {
-        resolve(response.data);
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  });
+const ApiService = {
+  get(resource, slug = "") {
+    return axiosClient.get(`${resource}/${slug}`).catch((error) => {
+      throw new Error(`ApiService ${error}`);
+    });
+  },
+
+  post(resource, params) {
+    return axiosClient.post(`${resource}`, params);
+  },
+
+  update(resource, slug, params) {
+    return axiosClient.put(`${resource}/${slug}`, params);
+  },
+
+  put(resource, params) {
+    return axiosClient.put(`${resource}`, params);
+  },
+
+  delete(resource) {
+    return axiosClient.delete(resource).catch((error) => {
+      throw new Error(`ApiService ${error}`);
+    });
+  },
 };
 
-/**
- * @example export const getPostById = (id, data) => apiRequest(`/posts/${id}`, "get", data);
- * @example export const getPosts = (data) => apiRequest(`/posts`, "get", data);
- * @example export const createPost = (data) => apiRequest(`/posts`, "post", data);
- */
+export default ApiService;
+
+export const PostsService = {
+  get(postId) {
+    return ApiService.get("posts", postId);
+  },
+
+  create(params) {
+    return ApiService.post("posts", {
+      post: params,
+    });
+  },
+
+  update(postId, params) {
+    return ApiService.update("posts", postId, { post: params });
+  },
+
+  destroy(postId) {
+    return ApiService.delete(`posts/${postId}`);
+  },
+};
+
+export const CommentsService = {
+  get(postId) {
+    if (!postId) {
+      throw new Error("CommentsService.get() post id required to fetch comments");
+    }
+    return ApiService.get("posts", `${postId}/comments`);
+  },
+
+  post(postId, payload) {
+    return ApiService.post(`posts/${postId}/comments`, {
+      comment: { body: payload },
+    });
+  },
+
+  destroy(postId, commentId) {
+    return ApiService.delete(`posts/${postId}/comments/${commentId}`);
+  },
+};
