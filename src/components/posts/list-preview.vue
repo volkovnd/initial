@@ -15,7 +15,7 @@
       </v-col>
       <v-col col="3">
         <div>
-          <v-btn variant="danger" size="sm" @click="onClickDelete($event)">Удалить</v-btn>
+          <v-btn variant="danger" size="sm" @click="deletePost(post.id)">Удалить</v-btn>
         </div>
       </v-col>
     </v-row>
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { POST_DELETE } from "@/store/types/actions";
+import { mapActions } from "vuex";
 
 export default {
   name: "PostPreview",
@@ -43,11 +43,7 @@ export default {
     },
   },
   methods: {
-    onClickDelete(event) {
-      event.preventDefault();
-
-      this.$store.dispatch(POST_DELETE, this.post.id);
-    },
+    ...mapActions(["deletePost"]),
   },
 };
 </script>

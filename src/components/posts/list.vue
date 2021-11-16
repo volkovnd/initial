@@ -9,10 +9,10 @@
         <v-col col>
           <div class="list-heading">Author</div>
         </v-col>
-        <v-col>Всего: {{ totalPosts }}</v-col>
+        <v-col v-if="totalPosts">Всего: {{ totalPosts }}</v-col>
       </v-row>
 
-      <div v-if="posts.length === 0" class="post-preview">Nothing to show...</div>
+      <div v-if="!posts.length" class="post-preview">Nothing to show...</div>
 
       <PostListPreview v-for="post in posts" :key="post.id" :post="post" />
     </div>
@@ -20,8 +20,8 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import { FETCH_POSTS } from "@/store/types/actions";
+import { mapGetters, mapActions } from "vuex";
+
 import PostListPreview from "./list-preview.vue";
 
 export default {
@@ -42,26 +42,24 @@ export default {
   },
   computed: {
     listConfig() {
-      const filters = {
-        offset: (this.currentPage - 1) * this.itemPerPage,
-        limit: this.itemPerPage,
+      const params = {
+        _offset: (this.currentPage - 1) * this.itemPerPage,
+        _limit: this.itemPerPage,
       };
 
       return {
-        filters,
+        params,
       };
     },
 
     ...mapGetters(["isLoading", "posts", "totalPosts"]),
   },
   mounted() {
-    this.fetchPosts();
+    this.getPostList(this.listConfig);
   },
 
   methods: {
-    fetchPosts() {
-      this.$store.dispatch(FETCH_POSTS, this.listConfig);
-    },
+    ...mapActions(["getPostList"]),
   },
 };
 </script>

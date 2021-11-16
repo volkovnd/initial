@@ -1,6 +1,6 @@
 import { PostsService } from "@/api";
-import { FETCH_POST, POST_EDIT, POST_DELETE, POST_RESET_STATE, POST_CREATE } from "@/store/types/actions";
-import { RESET_STATE, SET_POST, DELETE_POST_IN_LIST } from "@/store/types/mutations";
+
+import { DELETE_POST, SET_POST, UPDATE_POST, CREATE_POST } from "@/store/mutation-types";
 
 const initialState = {
   post: {
@@ -12,49 +12,39 @@ const initialState = {
 export const state = { ...initialState };
 
 export const actions = {
-  async [FETCH_POST](context, postId, prevPost) {
-    if (prevPost !== undefined) {
-      return context.commit(SET_POST, prevPost);
-    }
-    const { data } = await PostsService.get(postId);
+  async getPost(context, postId) {
+    const response = await PostsService.get(postId);
 
-    context.commit(SET_POST, data);
+    const post = response.data;
 
-    return data;
+    context.commit(SET_POST, post);
+
+    return post;
   },
 
-  async [POST_DELETE]({ commit }, postId) {
+  async deletePost({ commit }, postId) {
     await PostsService.destroy(postId);
 
-    commit(DELETE_POST_IN_LIST, postId);
+    commit(DELETE_POST, postId);
   },
 
-  async [POST_EDIT]({ state }) {
-    const data = await PostsService.update(state.post.id, state.post);
+  async updatePost({ commit }, data) {
+    await PostsService.update(state.post.id, data);
 
-    return data;
+    commit(UPDATE_POST, data);
   },
 
-  [POST_RESET_STATE]({ commit }) {
-    commit(RESET_STATE);
-  },
+  async createPost({ commit }, data) {
+    await PostsService.create(data);
 
-  async [POST_CREATE]({ state }) {
-    const data = await PostsService.create(state.post);
-
-    return data;
+    commit(CREATE_POST, data);
   },
 };
 
 /* eslint no-param-reassign: ["error", { "props": false }] */
 export const mutations = {
-  [SET_POST](state, post) {
-    state.post = post;
-  },
-  [RESET_STATE]() {
-    for (const f in state) {
-      state[f] = initialState;
-    }
+  [SET_POST]: (state, data) => {
+    state.post = data;
   },
 };
 

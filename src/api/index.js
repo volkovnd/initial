@@ -5,34 +5,6 @@ export const axiosClient = axios.create({
   baseURL: API_BASE_URL,
 });
 
-if (process.env.NODE_ENV === "development") {
-  axiosClient.interceptors.request.use((config) => {
-    return new Promise((resolve, reject) => {
-      config.params = config.params || {};
-
-      if (config.filters)
-        config.params = Object.keys(config.filters).reduce(
-          (params, key) => ({
-            [`_${key}`]: config.filters[key],
-            ...params,
-          }),
-          {}
-        );
-
-      resolve(config);
-    });
-  });
-
-  axiosClient.interceptors.response.use((value) => {
-    if (value.headers["x-total-count"]) {
-      value.data.list = value.data;
-      value.data.total = parseInt(value.headers["x-total-count"], 10);
-    }
-
-    return value;
-  });
-}
-
 export const ApiService = {
   query(resource, params) {
     return axiosClient.get(resource, params).catch((error) => {
@@ -89,12 +61,12 @@ export const PostsService = {
   },
 };
 
-export const CommentsService = {
+export const PostsCommentsService = {
   get(postId) {
     if (!postId) {
       throw new Error("CommentsService.get() post id required to fetch comments");
     }
-    return ApiService.get("posts", `${postId}/comments`);
+    return ApiService.get(`posts/${postId}/comments`);
   },
 
   post(postId, payload) {

@@ -1,17 +1,19 @@
 <template>
   <form>
     <h3>form</h3>
-    <v-row class="row-cols-2 g-3">
-      <v-col>
+    <v-grid columns="3">
+      <v-grid-col>
         <v-form-control v-model="formData.title" placeholder="Title" />
-      </v-col>
-      <v-col>
+      </v-grid-col>
+
+      <v-grid-col>
         <v-form-control v-model="formData.author" placeholder="Author" />
-      </v-col>
-      <v-col>
-        <v-btn type="submit" variant="primary" @click.prevent="onSubmit($event)">Submit</v-btn>
-      </v-col>
-    </v-row>
+      </v-grid-col>
+
+      <v-grid-col>
+        <v-btn type="submit" outline block variant="primary" @click.prevent="onSubmit($event)">Submit</v-btn>
+      </v-grid-col>
+    </v-grid>
   </form>
 </template>
 

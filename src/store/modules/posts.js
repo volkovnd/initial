@@ -1,6 +1,12 @@
 import { PostsService } from "@/api";
-import { FETCH_POSTS } from "@/store/types/actions";
-import { FETCH_START, FETCH_END, UPDATE_POST_IN_LIST, DELETE_POST_IN_LIST } from "@/store/types/mutations";
+import {
+  DELETE_POST,
+  SET_POST_LIST,
+  SET_TOTAL_POSTS,
+  SUCCESS_LOADED,
+  START_LOADING,
+  UPDATE_POST_LIST,
+} from "@/store/mutation-types";
 
 const initialState = {
   isLoading: true,
@@ -11,41 +17,53 @@ const initialState = {
 
 const state = () => ({ ...initialState });
 
+/** @type {import("vuex").ActionTree} */
 const actions = {
-  async [FETCH_POSTS]({ commit }, params) {
+  async getPostList({ commit }, params) {
     try {
-      commit(FETCH_START);
+      commit(START_LOADING);
 
       const response = await PostsService.query(params);
 
-      const data = response.data;
+      if (response.headers["x-total-count"]) {
+        commit("SET_TOTAL_POSTS", parseInt(response.headers["x-total-count"]));
+      }
 
-      const posts = data.list ? data.list : data;
-      const totalPosts = data.total || null;
-
-      commit(FETCH_END, {
-        posts,
-        totalPosts,
-      });
+      commit(SET_POST_LIST, response.data);
+      commit(SUCCESS_LOADED);
     } catch (error) {
       throw new Error(error);
     }
   },
 };
 
+/** @type {import("vuex").MutationTree} */
 const mutations = {
-  [FETCH_START]: (state) => {
+  [START_LOADING]: (state) => {
     state.isLoading = true;
   },
 
-  [FETCH_END](state, { posts, totalPosts }) {
-    state.posts = posts;
-    if (totalPosts) state.totalPosts = totalPosts;
-
+  [SUCCESS_LOADED]: (state) => {
     state.isLoading = false;
   },
 
-  [UPDATE_POST_IN_LIST](state, data) {
+  [DELETE_POST]: (state, postId) => {
+    state.posts = state.posts.filter((post) => {
+      return post.id !== postId;
+    });
+
+    state.totalPosts = state.totalPosts - 1;
+  },
+
+  [SET_TOTAL_POSTS]: (state, totalPosts) => {
+    state.totalPosts = totalPosts;
+  },
+
+  [SET_POST_LIST]: (state, posts) => {
+    state.posts = posts;
+  },
+
+  [UPDATE_POST_LIST]: (state, data) => {
     state.posts = state.posts.map((post) => {
       if (post.id !== data.id) {
         return post;
@@ -54,15 +72,9 @@ const mutations = {
       return post;
     });
   },
-  [DELETE_POST_IN_LIST](state, postId) {
-    state.posts = state.posts.filter((post) => {
-      return post.id !== postId;
-    });
-
-    state.totalPosts = state.totalPosts - 1;
-  },
 };
 
+/** @type {import("vuex").GetterTree} */
 const getters = {
   posts(state) {
     return state.posts;
