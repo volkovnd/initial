@@ -6,14 +6,17 @@
       </div>
     </div>
     <div class="container page">
-      <div class="row"></div>
+      <v-row>
+        <v-col col="3">Автор</v-col>
+        <v-col col="9">{{ post.author }}</v-col>
+      </v-row>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 import store from "@/store";
+import { mapGetters } from "vuex";
 import { FETCH_POST } from "@/store/actions.type";
 
 export default {

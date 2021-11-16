@@ -3,9 +3,14 @@
     <div v-if="isLoading" class="post-preview">Загрузка..</div>
     <div v-else>
       <v-row>
-        <v-col col class="list-heading">Название</v-col>
-        <v-col col class="list-heading">Автор</v-col>
+        <v-col col>
+          <div class="list-heading">Название</div>
+        </v-col>
+        <v-col col>
+          <div class="list-heading">Автор</div>
+        </v-col>
       </v-row>
+
       <div v-if="posts.length === 0" class="post-preview">Нет ни одного поста...</div>
       <PostListPreview v-for="post in posts" :key="post.id" :post="post" />
     </div>

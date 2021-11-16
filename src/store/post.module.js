@@ -4,7 +4,7 @@ import { RESET_STATE, SET_POST } from "@/store/mutations.type";
 
 const initialState = {
   post: {
-    author: {},
+    author: "",
     title: "",
   },
 };

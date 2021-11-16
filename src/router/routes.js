@@ -12,6 +12,7 @@ export default [
     path: "/posts/:id",
     name: "post",
     component: () => import(/* webpackChunkName: "post" */ "@/views/post.vue"),
+
     props: true,
   },
   {
@@ -21,3 +22,4 @@ export default [
     component: () => import(/* webpackChunkName: "about" */ "@/views/about.vue"),
   },
 ];
+Z;
