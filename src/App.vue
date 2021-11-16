@@ -28,7 +28,3 @@ export default {
   name: "App",
 };
 </script>
-
-<style lang="scss">
-@import "@/scss/vendor/bootstrap/index";
-</style>

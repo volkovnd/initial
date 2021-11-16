@@ -1,5 +1,4 @@
-export default function (Vue, options) {
-  import("webfontloader").then((WebFont) => {
-    WebFont.load(options);
-  });
-}
+import WebFont from "webfontloader";
+import { WEB_FONT_CONFIG } from "@/config";
+
+WebFont.load(WEB_FONT_CONFIG);
