@@ -1,3 +1,5 @@
-const omit = require("lodash/omit");
+export function removeFromArray(arr, item) {
+  const index = arr.indexOf(item);
 
-export { omit };
+  if (index > -1) arr.splice(index, 1);
+}

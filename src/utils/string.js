@@ -11,9 +11,9 @@ const kebabCase = require("lodash/kebabCase");
  * upperFirst('foo bar');
  * // => 'Foo bar'
  */
-const upperFirst = function (str) {
+export function upperFirst(str) {
   return `${str.charAt(0).toUpperCase()}${str.slice(1)}`;
-};
+}
 
 /**
  * Converts `string` to [pascal case](https://en.wikipedia.org/wiki/CamelCase).
@@ -31,8 +31,8 @@ const upperFirst = function (str) {
  * pascalCase('__FOO_BAR__');
  * // => 'FooBar'
  */
-const pascalCase = function (str) {
+export function pascalCase(str) {
   return upperFirst(camelCase(str));
-};
+}
 
-export { kebabCase, camelCase, pascalCase, upperFirst };
+export { kebabCase, camelCase };

@@ -1,11 +1,24 @@
 import Vue from "vue";
-import { kebabCase } from "@/utils";
+
+import { kebabCase } from "@/utils/string";
 
 const context = require.context("@/components", true, /v-[\w-]+\.(vue|js)$/);
 
-context.keys().forEach((key) => {
-  const name = kebabCase(key.replace(/^\..*\//, "").replace(/\.[\w]+$/, ""));
-  const options = context(key).default;
+const components = context
+  .keys()
+  .map((key) => ({
+    name: kebabCase(key.replace(/^\..*\//, "").replace(/\.[\w]+$/, "")),
+    options: context(key).default,
+  }))
+  .reduce(
+    (components, { name, options }) => ({
+      [name]: options,
 
-  Vue.component(name, options);
-});
+      ...components,
+    }),
+    {}
+  );
+
+for (let name in components) {
+  Vue.component(name, components[name]);
+}
