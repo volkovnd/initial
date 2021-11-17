@@ -6,6 +6,7 @@ import store from "./store";
 import "@/plugins/web-fonts";
 import "@/plugins/bootstrap";
 import "@/plugins/global-components";
+import "@/plugins/animate-css";
 
 import App from "./App.vue";
 

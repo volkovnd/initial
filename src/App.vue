@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <component :is="LayoutComponent" :key="LayoutComponent.name || LayoutComponent.__file">
-      <RouterView />
+      <transition mode="out-in" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+        <RouterView :key="$route.fullPath" />
+      </transition>
     </component>
   </div>
 </template>
