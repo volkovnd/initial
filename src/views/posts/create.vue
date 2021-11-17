@@ -12,8 +12,6 @@ import PostsCreate from "@/components/posts/create.vue";
 export default {
   name: "PostsCreateView",
 
-  components: {
-    PostsCreate,
-  },
+  components: { PostsCreate },
 };
 </script>

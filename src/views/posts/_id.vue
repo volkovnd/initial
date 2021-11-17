@@ -1,5 +1,5 @@
 <template>
-  <div class="post-page">
+  <div>
     <div class="banner">
       <div class="container">
         <h1>{{ post.title }}</h1>
