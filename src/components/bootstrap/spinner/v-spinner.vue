@@ -9,7 +9,7 @@ export default {
       type: String,
       default: "div",
     },
-    variant: {
+    textVariant: {
       type: String,
       default: null,
     },
@@ -18,7 +18,20 @@ export default {
       default: "loading...",
     },
   },
-  render: (h, { data, props, slots }) => {
+  render: (h, { data, props }) => {
+    let $text = h();
+
+    if (props.text) {
+      $text = h("span", {
+        domProps: {
+          innerHTML: props.text,
+        },
+        staticClass: "visually-hidden",
+      });
+    }
+
+    const computedTextVariantClass = [props.textVariant ? `text-${props.textVariant}` : null];
+
     return h(
       props.tagName,
       mergeData(data, {
@@ -26,19 +39,9 @@ export default {
           role: "status",
         },
         staticClass: "spinner-border",
-        class: {
-          [`text-${props.variant}`]: !!props.variant,
-        },
+        class: [computedTextVariantClass],
       }),
-      [
-        h(
-          "span",
-          {
-            staticClass: "visually-hidden",
-          },
-          [slots().default || props.text]
-        ),
-      ]
+      [$text]
     );
   },
 };

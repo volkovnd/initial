@@ -1,21 +1,24 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import DefaultLayout from "@/layout/default.vue";
 
 import routes from "./routes";
+
+import { asyncComponentFactory } from "@/utils/components";
 
 Vue.use(VueRouter);
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL || __dirname,
-  routes: [
-    {
-      path: "",
-      component: DefaultLayout,
-      children: routes,
-    },
-  ],
+  routes: routes.map(makeRouteAsync),
 });
 
 export default router;
+
+function makeRouteAsync(route) {
+  return {
+    component: asyncComponentFactory(route.component),
+
+    ...route,
+  };
+}

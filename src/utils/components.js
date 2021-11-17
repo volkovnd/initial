@@ -16,3 +16,16 @@ export const registerComponents = (VueConstructor, components = {}) => {
     registerComponent(VueConstructor, name, components[name]);
   }
 };
+
+/**
+ *
+ * @param {import("vue/types/options").ImportedComponent}  component
+ * @returns {import("vue/types/options").AsyncComponentFactory}
+ */
+export function asyncComponentFactory(component) {
+  return () => ({
+    component: Promise.resolve(component),
+
+    loading: require("@/views/_loading.vue"),
+  });
+}
