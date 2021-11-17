@@ -1,20 +1,15 @@
 const express = require("express");
+const jsonServer = require("json-server");
 
-function createJSONServer(data) {
-  const jsonServer = require("json-server");
+module.exports = (app) => {
+  app.use(express.json());
 
   const server = jsonServer.create();
-  const router = jsonServer.router(data);
+  const router = jsonServer.router("db.json");
   const middlewares = jsonServer.defaults();
 
   server.use(middlewares);
   server.use(router);
 
-  return server;
-}
-
-module.exports = (app) => {
-  app.use(express.json());
-
-  app.use("/api", createJSONServer("db.json"));
+  app.use("/api", server);
 };
