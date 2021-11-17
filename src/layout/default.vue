@@ -5,7 +5,7 @@
 
     <main id="main">
       <v-container>
-        <router-view :key="$route.fullPath" />
+        <slot />
       </v-container>
     </main>
   </div>
