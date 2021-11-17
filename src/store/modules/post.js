@@ -9,9 +9,9 @@ const initialState = {
   },
 };
 
-export const state = { ...initialState };
+const state = { ...initialState };
 
-export const actions = {
+const actions = {
   async getPost(context, postId) {
     const response = await PostsService.get(postId);
 
@@ -42,7 +42,7 @@ export const actions = {
 };
 
 /* eslint no-param-reassign: ["error", { "props": false }] */
-export const mutations = {
+const mutations = {
   [SET_POST]: (state, data) => {
     state.post = data;
   },
@@ -56,7 +56,7 @@ const getters = {
 
 export default {
   state,
-  actions,
   mutations,
+  actions,
   getters,
 };
