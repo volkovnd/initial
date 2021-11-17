@@ -1,15 +1,9 @@
 const express = require("express");
-const jsonServer = require("json-server");
+const createJSONServer = require("@vue/cli-test-utils/createJSONServer");
+const logger = require("@vue/cli-shared-utils/lib/logger");
 
 module.exports = (app) => {
   app.use(express.json());
 
-  const server = jsonServer.create();
-  const router = jsonServer.router("db.json");
-  const middlewares = jsonServer.defaults();
-
-  server.use(middlewares);
-  server.use(router);
-
-  app.use("/api", server);
+  app.use("/api", createJSONServer("db.json"));
 };
