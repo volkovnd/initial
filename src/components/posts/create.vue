@@ -3,11 +3,11 @@
     <h3>form</h3>
     <v-grid columns="3">
       <v-grid-col>
-        <v-form-control v-model="currentPost.title" placeholder="Title" />
+        <v-form-control v-model="post.title" placeholder="Title" />
       </v-grid-col>
 
       <v-grid-col>
-        <v-form-control v-model="currentPost.author" placeholder="Author" />
+        <v-form-control v-model="post.author" placeholder="Author" />
       </v-grid-col>
 
       <v-grid-col>
@@ -25,14 +25,14 @@ export default {
   name: "PostsCreate",
   mixins: [postPropMixin],
   methods: {
-    ...mapActions(["addPost"]),
+    ...mapActions("posts", ["addPost"]),
 
     async onSubmit() {
       try {
         const formData = {};
 
-        for (let key in this.currentPost) {
-          formData[key] = this.currentPost[key];
+        for (let key in this.post) {
+          formData[key] = this.post[key];
         }
 
         await this.addPost(formData);

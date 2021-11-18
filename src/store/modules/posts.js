@@ -1,3 +1,4 @@
+import { toInteger } from "@/utils/number";
 import { PostsService } from "@/api";
 import {
   SET_POSTS,
@@ -5,8 +6,6 @@ import {
   UPDATE_POST,
   DELETE_POST,
   SET_TOTAL_POSTS,
-  INCREMENT_TOTAL_POSTS,
-  DECREMENT_TOTAL_POSTS,
   START_LOADING,
   END_LOADING,
 } from "@/store/mutation-types";
@@ -23,55 +22,47 @@ const state = () => ({ ...initialState });
 /** @type {import("vuex").ActionTree} */
 const actions = {
   async getPosts({ commit }, params) {
-    try {
-      commit(START_LOADING);
+    commit(START_LOADING);
 
-      const response = await PostsService.query(params);
+    const response = await PostsService.query(params);
 
-      commit(SET_POSTS, response.data);
+    commit(SET_POSTS, response.data);
 
-      if (response.headers["x-total-count"]) commit("SET_TOTAL_POSTS", response.headers["x-total-count"]);
-
-      commit(END_LOADING);
-    } catch (error) {
-      throw new Error("Error while getting posts!!!");
+    if (response.headers["x-total-count"]) {
+      commit("SET_TOTAL_POSTS", toInteger(response.headers["x-total-count"]));
     }
+
+    commit(END_LOADING);
   },
 
-  async fetchPostData({ commit }, postId) {
-    try {
-      commit(START_LOADING);
+  async fetchPost({ commit }, id) {
+    commit(START_LOADING);
 
-      const response = await PostsService.get(postId);
+    const response = await PostsService.get(id);
 
-      commit(END_LOADING);
+    commit(END_LOADING);
 
-      return response.data;
-    } catch (err) {
-      throw new Error("Error while fetching data!!!");
-    }
+    return response.data;
   },
 
-  async addPost({ commit }, data) {
-    try {
-      await PostsService.create(data);
+  async addPost({ commit, state }, data) {
+    await PostsService.create(data);
 
-      commit(CREATE_POST, data);
-      commit(INCREMENT_TOTAL_POSTS);
-    } catch (err) {
-      throw new Error("Error while creating new post!!!");
-    }
+    commit(CREATE_POST);
+
+    const totalPosts = state.totalPosts + 1;
+
+    commit(SET_TOTAL_POSTS, totalPosts);
   },
 
-  async deletePost({ commit }, postId) {
-    try {
-      await PostsService.destroy(postId);
+  async deletePost({ commit }, id) {
+    await PostsService.destroy(id);
 
-      commit(DELETE_POST, postId);
-      commit(DECREMENT_TOTAL_POSTS);
-    } catch (err) {
-      throw new Error("Error while deleting post!!!");
-    }
+    commit(DELETE_POST, id);
+
+    const totalPosts = state.totalPosts - 1;
+
+    commit(SET_TOTAL_POSTS, totalPosts);
   },
 };
 
@@ -83,30 +74,26 @@ const mutations = {
 
   [CREATE_POST]: () => {},
 
-  [DELETE_POST]: (state, postId) => {
-    const deleteIndex = state.posts.findIndex((post) => {
-      return post.id === postId;
+  [DELETE_POST]: (state, id) => {
+    const index = state.posts.findIndex((post) => {
+      return post.id === id;
     });
 
-    state.posts.splice(deleteIndex, 1);
+    if (index != null) {
+      state.posts.splice(index, 1);
+    }
   },
 
   [UPDATE_POST]: (state, data) => {
-    const updateIndex = state.posts.findIndex((post) => post.id === data.id);
+    const index = state.posts.findIndex((post) => post.id === data.id);
 
-    state.posts[updateIndex] = data;
+    if (index != null) {
+      state.posts[index] = data;
+    }
   },
 
   [SET_TOTAL_POSTS]: (state, totalPosts) => {
     state.totalPosts = totalPosts;
-  },
-
-  [INCREMENT_TOTAL_POSTS]: (state) => {
-    state.totalPosts = state.totalPosts + 1;
-  },
-
-  [DECREMENT_TOTAL_POSTS]: (state) => {
-    state.totalPosts = state.totalPosts - 1;
   },
 
   [START_LOADING]: (state) => {
@@ -138,4 +125,5 @@ export default {
   mutations,
   actions,
   getters,
+  namespaced: true,
 };

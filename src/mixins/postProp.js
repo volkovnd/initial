@@ -1,14 +1,19 @@
 export default {
   props: {
-    post: {
-      type: Object,
-      default: () => require("@/models/posts.json"),
+    author: {
+      type: String,
+      default: "",
+    },
+    title: {
+      type: String,
+      default: "",
     },
   },
   data() {
     return {
-      currentPost: {
-        ...this.post,
+      post: {
+        author: this.author,
+        title: this.title,
       },
     };
   },

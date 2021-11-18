@@ -2,20 +2,20 @@
   <div class="post-preview">
     <v-row>
       <v-col col="9">
-        <v-link :to="`/posts/${currentPost.id}`">
+        <v-link :to="postLinkTo">
           <v-row>
             <v-col col="6">
-              <div class="post-preview-title">{{ currentPost.title }}</div>
+              <div class="post-preview-title">{{ post.title }}</div>
             </v-col>
             <v-col col="6">
-              <div>{{ currentPost.author }}</div>
+              <div>{{ post.author }}</div>
             </v-col>
           </v-row>
         </v-link>
       </v-col>
       <v-col col="3">
         <div>
-          <v-btn variant="danger" size="sm" @click="onClickDelete">Удалить</v-btn>
+          <v-btn variant="danger" size="sm" @click="deletePost(id)">Удалить</v-btn>
         </div>
       </v-col>
     </v-row>
@@ -30,12 +30,19 @@ export default {
   name: "PostPreview",
   mixins: [postPropMixin],
   inheritAttrs: false,
-  methods: {
-    ...mapActions(["deletePost"]),
-
-    async onClickDelete() {
-      await this.deletePost(this.currentPost.id);
+  props: {
+    id: {
+      type: Number,
+      required: true,
     },
+  },
+  computed: {
+    postLinkTo() {
+      return "/posts/" + this.id;
+    },
+  },
+  methods: {
+    ...mapActions("posts", ["deletePost"]),
   },
 };
 </script>

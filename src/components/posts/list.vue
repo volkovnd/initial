@@ -14,7 +14,7 @@
 
       <div v-if="!posts.length" class="post-preview">Nothing to show...</div>
 
-      <PostListPreview v-for="post in posts" :key="post.id" :post="post" />
+      <PostListPreview v-for="post in posts" :key="post.id" v-bind="post" />
     </div>
   </div>
 </template>
@@ -39,31 +39,21 @@ export default {
       default: 1,
     },
   },
-  data() {
-    return {
-      currentPage: this.page,
-    };
-  },
   computed: {
-    offset() {
-      return (this.page - 1) * this.itemPerPage;
+    ...mapGetters("posts", ["isLoading", "posts", "totalPosts"]),
+    listParams() {
+      return {
+        offset: (this.page - 1) * this.itemPerPage,
+        limit: this.itemPerPage,
+      };
     },
-    limit() {
-      return this.itemPerPage;
-    },
-    ...mapGetters(["isLoading", "posts", "totalPosts"]),
   },
   created() {
-    this.getPosts({
-      params: {
-        _limit: this.limit,
-        _offset: this.offset,
-      },
-    });
+    this.getPosts(this.listParams);
   },
 
   methods: {
-    ...mapActions(["getPosts"]),
+    ...mapActions("posts", ["getPosts"]),
   },
 };
 </script>

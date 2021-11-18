@@ -6,33 +6,48 @@ export const axiosClient = axios.create({
 });
 
 export const ApiService = {
-  query(resource, params) {
-    return axiosClient.get(resource, params).catch((error) => {
-      throw new Error(`[RWV] ApiService ${error}`);
+  query(endpoint, params) {
+    if (process.env.NODE_ENV === "development") {
+      if (params.limit != null) params._limit = params.limit;
+      if (params.offset != null) params._offset = params.offset;
+    }
+
+    return axiosClient
+      .get(`/${endpoint}`, {
+        params,
+      })
+      .catch((error) => {
+        throw new Error(`ApiService[query] ${error}`);
+      });
+  },
+
+  get(endpoint, resource) {
+    return axiosClient.get(`/${endpoint}/${resource}`).catch((error) => {
+      throw new Error(`ApiService[get] ${error}`);
     });
   },
 
-  get(resource, slug = "") {
-    return axiosClient.get(`${resource}/${slug}`).catch((error) => {
-      throw new Error(`ApiService ${error}`);
+  post(endpoint, data) {
+    return axiosClient.post(`/${endpoint}`, data).catch((error) => {
+      throw new Error(`ApiService[post] ${error}`);
     });
   },
 
-  post(resource, params) {
-    return axiosClient.post(`${resource}`, params);
+  update(endpoint, resource, data) {
+    return axiosClient.put(`/${endpoint}/${resource}`, data).catch((error) => {
+      throw new Error(`ApiService[update] ${error}`);
+    });
   },
 
-  update(resource, slug, params) {
-    return axiosClient.put(`${resource}/${slug}`, params);
+  put(endpoint, data) {
+    return axiosClient.put(`/${endpoint}`, data).catch((error) => {
+      throw new Error(`ApiService[put] ${error}`);
+    });
   },
 
-  put(resource, params) {
-    return axiosClient.put(`${resource}`, params);
-  },
-
-  delete(resource) {
-    return axiosClient.delete(resource).catch((error) => {
-      throw new Error(`ApiService ${error}`);
+  delete(endpoint, resource) {
+    return axiosClient.delete(`/${endpoint}/${resource}`).catch((error) => {
+      throw new Error(`ApiService[delete] ${error}`);
     });
   },
 };
@@ -44,20 +59,20 @@ export const PostsService = {
     return ApiService.query("posts", params);
   },
 
-  get(postId) {
-    return ApiService.get("posts", postId);
+  get(id) {
+    return ApiService.get("posts", id);
   },
 
-  create(params) {
-    return ApiService.post("posts", params);
+  create(data) {
+    return ApiService.post("posts", data);
   },
 
-  update(postId, params) {
-    return ApiService.update("posts", postId, { post: params });
+  update(id, data) {
+    return ApiService.update("posts", id, data);
   },
 
-  destroy(postId) {
-    return ApiService.delete(`posts/${postId}`);
+  destroy(id) {
+    return ApiService.delete("posts", id);
   },
 };
 
@@ -69,13 +84,11 @@ export const PostsCommentsService = {
     return ApiService.get(`posts/${postId}/comments`);
   },
 
-  post(postId, payload) {
-    return ApiService.post(`posts/${postId}/comments`, {
-      comment: { body: payload },
-    });
+  create(postId, data) {
+    return ApiService.post(`posts/${postId}/comments`, data);
   },
 
   destroy(postId, commentId) {
-    return ApiService.delete(`posts/${postId}/comments/${commentId}`);
+    return ApiService.delete(`posts/${postId}/comments`, commentId);
   },
 };
