@@ -1,17 +1,20 @@
 import { PostsService } from "@/api";
 import {
+  SET_POSTS,
+  CREATE_POST,
+  UPDATE_POST,
   DELETE_POST,
-  SET_POST_LIST,
   SET_TOTAL_POSTS,
-  SUCCESS_LOADED,
+  INCREMENT_TOTAL_POSTS,
+  DECREMENT_TOTAL_POSTS,
   START_LOADING,
-  UPDATE_POST_LIST,
+  END_LOADING,
 } from "@/store/mutation-types";
 
 const initialState = {
-  isLoading: true,
-
   posts: [],
+
+  isLoading: false,
   totalPosts: 0,
 };
 
@@ -19,58 +22,99 @@ const state = () => ({ ...initialState });
 
 /** @type {import("vuex").ActionTree} */
 const actions = {
-  async getPostList({ commit }, params) {
+  async getPosts({ commit }, params) {
     try {
       commit(START_LOADING);
 
       const response = await PostsService.query(params);
 
-      if (response.headers["x-total-count"]) {
-        commit("SET_TOTAL_POSTS", parseInt(response.headers["x-total-count"]));
-      }
+      commit(SET_POSTS, response.data);
 
-      commit(SET_POST_LIST, response.data);
-      commit(SUCCESS_LOADED);
+      if (response.headers["x-total-count"]) commit("SET_TOTAL_POSTS", response.headers["x-total-count"]);
+
+      commit(END_LOADING);
     } catch (error) {
-      throw new Error(error);
+      throw new Error("Error while getting posts!!!");
+    }
+  },
+
+  async fetchPostData({ commit }, postId) {
+    try {
+      commit(START_LOADING);
+
+      const response = await PostsService.get(postId);
+
+      commit(END_LOADING);
+
+      return response.data;
+    } catch (err) {
+      throw new Error("Error while fetching data!!!");
+    }
+  },
+
+  async addPost({ commit }, data) {
+    try {
+      await PostsService.create(data);
+
+      commit(CREATE_POST, data);
+      commit(INCREMENT_TOTAL_POSTS);
+    } catch (err) {
+      throw new Error("Error while creating new post!!!");
+    }
+  },
+
+  async deletePost({ commit }, postId) {
+    try {
+      await PostsService.destroy(postId);
+
+      commit(DELETE_POST, postId);
+      commit(DECREMENT_TOTAL_POSTS);
+    } catch (err) {
+      throw new Error("Error while deleting post!!!");
     }
   },
 };
 
 /** @type {import("vuex").MutationTree} */
 const mutations = {
-  [START_LOADING]: (state) => {
-    state.isLoading = true;
+  [SET_POSTS]: (state, posts) => {
+    state.posts = posts;
   },
 
-  [SUCCESS_LOADED]: (state) => {
-    state.isLoading = false;
-  },
+  [CREATE_POST]: () => {},
 
   [DELETE_POST]: (state, postId) => {
-    state.posts = state.posts.filter((post) => {
-      return post.id !== postId;
+    const deleteIndex = state.posts.findIndex((post) => {
+      return post.id === postId;
     });
 
-    state.totalPosts = state.totalPosts - 1;
+    state.posts.splice(deleteIndex, 1);
+  },
+
+  [UPDATE_POST]: (state, data) => {
+    const updateIndex = state.posts.findIndex((post) => post.id === data.id);
+
+    state.posts[updateIndex] = data;
   },
 
   [SET_TOTAL_POSTS]: (state, totalPosts) => {
     state.totalPosts = totalPosts;
   },
 
-  [SET_POST_LIST]: (state, posts) => {
-    state.posts = posts;
+  [INCREMENT_TOTAL_POSTS]: (state) => {
+    state.totalPosts = state.totalPosts + 1;
   },
 
-  [UPDATE_POST_LIST]: (state, data) => {
-    state.posts = state.posts.map((post) => {
-      if (post.id !== data.id) {
-        return post;
-      }
+  [DECREMENT_TOTAL_POSTS]: (state) => {
+    state.totalPosts = state.totalPosts - 1;
+  },
 
-      return post;
-    });
+  [START_LOADING]: (state) => {
+    state.isLoading = true;
+  },
+
+  [END_LOADING]: (state) => {
+    state.isLoading = false;
   },
 };
 

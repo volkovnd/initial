@@ -3,54 +3,43 @@
     <h3>form</h3>
     <v-grid columns="3">
       <v-grid-col>
-        <v-form-control v-model="formData.title" placeholder="Title" />
+        <v-form-control v-model="currentPost.title" placeholder="Title" />
       </v-grid-col>
 
       <v-grid-col>
-        <v-form-control v-model="formData.author" placeholder="Author" />
+        <v-form-control v-model="currentPost.author" placeholder="Author" />
       </v-grid-col>
 
       <v-grid-col>
-        <v-btn type="submit" outline block variant="primary" @click.prevent="onSubmit($event)">Submit</v-btn>
+        <v-btn type="submit" block variant="primary" @click.prevent="onSubmit($event)">Submit</v-btn>
       </v-grid-col>
     </v-grid>
   </form>
 </template>
 
 <script>
-import { PostsService } from "@/api/index";
+import { mapActions } from "vuex";
+import postPropMixin from "@/mixins/postProp";
 
 export default {
   name: "PostsCreate",
-
-  data() {
-    return {
-      formData: {
-        title: "",
-        author: "",
-      },
-    };
-  },
-
+  mixins: [postPropMixin],
   methods: {
-    reset() {
-      this.formData = {
-        title: "",
-        author: "",
-      };
-    },
+    ...mapActions(["addPost"]),
 
     async onSubmit() {
       try {
-        const data = this.formData;
+        const formData = {};
 
-        await PostsService.create(data);
+        for (let key in this.currentPost) {
+          formData[key] = this.currentPost[key];
+        }
 
-        this.reset();
+        await this.addPost(formData);
 
-        this.$router.push({ name: "posts" });
+        this.$router.push("/posts");
       } catch (err) {
-        console.log(err);
+        throw new Error(err);
       }
     },
   },

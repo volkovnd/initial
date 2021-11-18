@@ -17,7 +17,6 @@ export default [
     path: "/posts/:id",
     name: "post",
     component: () => import(/* webpackChunkName: "posts-get" */ "@/views/posts/_id.vue"),
-    props: true,
   },
   {
     path: "/about",

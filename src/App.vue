@@ -18,3 +18,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+#app {
+  --animate-duration: 0.3s;
+}
+</style>

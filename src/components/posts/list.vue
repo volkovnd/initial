@@ -34,32 +34,36 @@ export default {
       type: Number,
       default: 10,
     },
+    page: {
+      type: Number,
+      default: 1,
+    },
   },
   data() {
     return {
-      currentPage: 1,
+      currentPage: this.page,
     };
   },
   computed: {
-    listConfig() {
-      const params = {
-        _offset: (this.currentPage - 1) * this.itemPerPage,
-        _limit: this.itemPerPage,
-      };
-
-      return {
-        params,
-      };
+    offset() {
+      return (this.page - 1) * this.itemPerPage;
     },
-
+    limit() {
+      return this.itemPerPage;
+    },
     ...mapGetters(["isLoading", "posts", "totalPosts"]),
   },
-  mounted() {
-    this.getPostList(this.listConfig);
+  created() {
+    this.getPosts({
+      params: {
+        _limit: this.limit,
+        _offset: this.offset,
+      },
+    });
   },
 
   methods: {
-    ...mapActions(["getPostList"]),
+    ...mapActions(["getPosts"]),
   },
 };
 </script>

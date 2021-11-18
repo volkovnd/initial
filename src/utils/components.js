@@ -12,20 +12,21 @@ export const registerComponent = (VueConstructor, name, def) => {
  * @param {object} components
  */
 export const registerComponents = (VueConstructor, components = {}) => {
-  for (const name in components) {
-    registerComponent(VueConstructor, name, components[name]);
-  }
+  Object.entries(components).map(([name, options]) => registerComponent(VueConstructor, name, options));
 };
 
 /**
- *
- * @param {import("vue/types/options").ImportedComponent}  component
+ * @param {import("vue/types/options").ImportedComponent} component
  * @returns {import("vue/types/options").AsyncComponentFactory}
  */
-export function asyncComponentFactory(component) {
-  return () => ({
-    component: Promise.resolve(component),
-
-    loading: require("@/views/_loading.vue"),
-  });
+export function asyncComponentFactoryFactory(asyncImport, { loading, error, delay, timeout } = {}) {
+  return function () {
+    return () => ({
+      component: Promise.resolve(asyncImport),
+      loading,
+      error,
+      delay,
+      timeout,
+    });
+  };
 }

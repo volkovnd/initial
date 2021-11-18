@@ -2,20 +2,20 @@
   <div class="post-preview">
     <v-row>
       <v-col col="9">
-        <v-link :to="postLink">
+        <v-link :to="`/posts/${currentPost.id}`">
           <v-row>
             <v-col col="6">
-              <div class="post-preview-title">{{ post.title }}</div>
+              <div class="post-preview-title">{{ currentPost.title }}</div>
             </v-col>
             <v-col col="6">
-              <div>{{ post.author }}</div>
+              <div>{{ currentPost.author }}</div>
             </v-col>
           </v-row>
         </v-link>
       </v-col>
       <v-col col="3">
         <div>
-          <v-btn variant="danger" size="sm" @click="deletePost(post.id)">Удалить</v-btn>
+          <v-btn variant="danger" size="sm" @click="onClickDelete">Удалить</v-btn>
         </div>
       </v-col>
     </v-row>
@@ -24,26 +24,18 @@
 
 <script>
 import { mapActions } from "vuex";
+import postPropMixin from "@/mixins/postProp";
 
 export default {
   name: "PostPreview",
-  props: {
-    post: { type: Object, required: true },
-  },
-  computed: {
-    postLink() {
-      const postId = this.post.id;
-
-      return {
-        name: "post",
-        params: {
-          id: postId,
-        },
-      };
-    },
-  },
+  mixins: [postPropMixin],
+  inheritAttrs: false,
   methods: {
     ...mapActions(["deletePost"]),
+
+    async onClickDelete() {
+      await this.deletePost(this.currentPost.id);
+    },
   },
 };
 </script>

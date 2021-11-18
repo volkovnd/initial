@@ -2,7 +2,7 @@
 import { mergeData } from "vue-functional-data-merge";
 
 export default {
-  name: "VContaner",
+  name: "VContainer",
   functional: true,
   props: {
     tagName: {
@@ -15,12 +15,12 @@ export default {
     },
   },
   render: (h, { data, props, children }) => {
-    const computedFluidClass = [props.fluid ? "container-fluid" : "container"];
+    const computedFluidClassName = [props.fluid ? "container-fluid" : "container"];
 
     return h(
       props.tagName,
       mergeData(data, {
-        class: [computedFluidClass],
+        class: [computedFluidClassName],
       }),
       children
     );

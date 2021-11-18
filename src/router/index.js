@@ -1,24 +1,16 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-import routes from "./routes";
+import { BASE_URL } from "@/config";
 
-import { asyncComponentFactory } from "@/utils/components";
+import routes from "./routes";
 
 Vue.use(VueRouter);
 
 const router = new VueRouter({
   mode: "history",
-  base: process.env.BASE_URL || __dirname,
-  routes: [...routes.map(makeRouteAsync)],
+  base: BASE_URL,
+  routes,
 });
 
 export default router;
-
-function makeRouteAsync(route) {
-  return {
-    component: asyncComponentFactory(route.component),
-
-    ...route,
-  };
-}

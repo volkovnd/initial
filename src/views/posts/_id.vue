@@ -2,13 +2,13 @@
   <div>
     <div class="banner">
       <div class="container">
-        <h1>{{ post.title }}</h1>
+        <h1>{{ currentPost.title }}</h1>
       </div>
     </div>
     <div class="container page">
       <v-row>
         <v-col col="3">Автор</v-col>
-        <v-col col="9">{{ post.author }}</v-col>
+        <v-col col="9">{{ currentPost.author }}</v-col>
       </v-row>
     </div>
   </div>
@@ -16,23 +16,32 @@
 
 <script>
 import store from "@/store";
-import { mapGetters } from "vuex";
+import postPropMixin from "@/mixins/postProp";
 
 export default {
   name: "PostView",
-  beforeRouteEnter: (to, from, next) => {
-    store.dispatch("getPost", to.params.id).then(() => {
-      next();
+  mixins: [postPropMixin],
+  beforeRouteEnter(to, from, next) {
+    const id = to.params.id;
+
+    store.dispatch("fetchPostData", id).then((data) => {
+      next((vm) => {
+        vm.currentPost = {
+          ...data,
+        };
+      });
     });
   },
-  props: {
-    id: {
-      type: [Number, String],
-      required: true,
-    },
-  },
-  computed: {
-    ...mapGetters(["post"]),
+  beforeRouteUpdate(to, from, next) {
+    const id = to.params.id;
+
+    store.dispatch("fetchPostData", id).then((data) => {
+      for (let key in data) {
+        this.currentPost[key] = data[key];
+      }
+
+      next();
+    });
   },
 };
 </script>
