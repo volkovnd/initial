@@ -55,7 +55,7 @@ const actions = {
     commit(SET_TOTAL_POSTS, totalPosts);
   },
 
-  async deletePost({ commit }, id) {
+  async deletePost({ commit, state }, id) {
     await PostsService.destroy(id);
 
     commit(DELETE_POST, id);
