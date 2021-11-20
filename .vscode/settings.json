@@ -1,0 +1,49 @@
+{
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "**/node_modules": true,
+    "**/package-lock.json": true,
+    "**/dist": true,
+    "**/.eslintcache": true
+  },
+  "files.encoding": "utf8",
+  "files.eol": "\n",
+
+  "editor.insertSpaces": true,
+  "editor.tabSize": 2,
+  "editor.trimAutoWhitespace": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.stylelint": true
+  },
+
+  "eslint.enable": true,
+  "eslint.format.enable": true,
+  "eslint.validate": ["javascript"],
+
+  "stylelint.enable": true,
+  "stylelint.validate": ["css", "scss"],
+
+  "javascript.format.enable": false,
+  "typescript.format.enable": false,
+
+  "json.format.enable": false,
+  "html.format.enable": false,
+
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false,
+
+  "[javascript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  }
+}
