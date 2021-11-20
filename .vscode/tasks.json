@@ -5,25 +5,57 @@
       "type": "npm",
       "script": "install",
       "problemMatcher": [],
-      "label": "Install dependencies"
+      "label": "install"
     },
     {
       "type": "npm",
       "script": "format",
       "problemMatcher": [],
-      "label": "Format"
+      "label": "format"
     },
     {
       "type": "npm",
       "script": "lint",
       "problemMatcher": [],
-      "label": "Lint"
+      "label": "lint"
     },
     {
       "type": "npm",
       "script": "clean",
       "problemMatcher": [],
-      "label": "Remove build results directory"
+      "label": "clean"
+    },
+    {
+      "type": "npm",
+      "script": "build",
+      "problemMatcher": [],
+      "label": "build"
+    },
+    {
+      "type": "npm",
+      "script": "serve",
+      "problemMatcher": [
+        {
+          "base": "$tsc-watch",
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": "Starting development server",
+            "endsPattern": "Compiled successfully"
+          }
+        }
+      ],
+      "label": "serve",
+      "detail": "Start development local",
+      "isBackground": true,
+      "promptOnClose": true,
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "new",
+        "close": true
+      },
+      "runOptions": { "instanceLimit": 1, "reevaluateOnRerun": true }
     }
   ]
 }

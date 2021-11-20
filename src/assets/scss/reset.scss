@@ -1,0 +1,153 @@
+@import "~normalize.css/normalize.css";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: $body-font-family;
+  font-size: $body-font-size;
+  font-weight: $body-font-weight;
+  line-height: $body-line-height;
+  color: $body-color;
+  text-align: $body-text-align;
+  background-color: $body-bg;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: rgba($black, 0%);
+}
+
+a {
+  color: $links-color;
+  text-decoration: $links-text-decoration;
+  cursor: $links-cursor;
+
+  &:hover {
+    color: $links-hover-color;
+    text-decoration: $links-hover-text-decoration;
+  }
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: $paragraphs-margin-bottom;
+}
+
+h1 {
+  @extend %heading;
+  font-size: $h1-font-size;
+}
+h2 {
+  @extend %heading;
+  font-size: $h2-font-size;
+}
+h3 {
+  @extend %heading;
+  font-size: $h3-font-size;
+}
+h4 {
+  @extend %heading;
+  font-size: $h4-font-size;
+}
+h5 {
+  @extend %heading;
+  font-size: $h5-font-size;
+}
+h6 {
+  @extend %heading;
+  font-size: $h6-font-size;
+}
+
+ol,
+ul {
+  padding-left: 2rem;
+}
+
+ol,
+ul,
+dl {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+ol ol,
+ul ul,
+ol ul,
+ul ol {
+  margin-bottom: 0;
+}
+
+// Figures
+
+figure {
+  margin: 0 0 1rem;
+}
+
+// Images and content
+img,
+svg {
+  vertical-align: middle;
+}
+
+button {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  border-radius: 0;
+  -webkit-appearance: button;
+
+  &:not(:disabled) {
+    cursor: $buttons-cursor;
+  }
+  &:focus:not(:focus-visible) {
+    outline: 0;
+  }
+}
+
+[role="button"] {
+  cursor: $buttons-cursor;
+}
+
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
+}
+
+input,
+select,
+optgroup,
+textarea {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+select {
+  word-wrap: normal;
+
+  &:disabled {
+    opacity: 1;
+  }
+}
+
+::-moz-focus-inner {
+  padding: 0;
+  border-style: none;
+}
+
+textarea {
+  resize: vertical;
+}
+
+[hidden] {
+  display: none !important;
+}

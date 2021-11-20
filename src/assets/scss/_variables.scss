@@ -1,0 +1,75 @@
+/* Colors */
+$black: #000;
+$gray: rgba(0, 0, 0, 0.4);
+$red: #cb3837;
+$blue: #357edd;
+$green: #00c642;
+$yellow: #ffcd3a;
+$violet: #8956ff;
+$purple: #c836c3;
+$white: #fff;
+
+/* Font-weights */
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+
+/* Font-families */
+$font-family-sans: "Helvetica", "Arial", sans-serif;
+
+/* Gutters */
+$gutter: 16px;
+
+/* Base */
+$base-font-size: 16px;
+$base-font-family: $font-family-sans;
+$base-font-weight: $font-weight-normal;
+$base-line-height: 1.4;
+$base-font-style: normal;
+$base-color: rgba(0, 0, 0, 0.8);
+$base-text-align: left;
+$base-letter-spacing: 0;
+
+/* Body */
+$body-bg: $white;
+$body-font-size: $base-font-size;
+$body-font-weight: $base-font-weight;
+$body-font-family: $base-font-family;
+$body-line-height: $base-line-height;
+$body-color: $base-color;
+$body-text-align: $base-text-align;
+
+/* Paragraphs */
+$paragraphs-margin-bottom: 1rem;
+
+/* Headings */
+$headings-font-family: $base-font-family;
+$headings-font-weight: $font-weight-medium;
+$headings-line-height: 1.15;
+$headings-color: $black;
+$headings-margin-bottom: 1.5rem;
+$headings-font-style: normal;
+$headings-text-align: center;
+$headings-letter-spacing: 0;
+
+/* h1-h6 */
+$h1-font-size: 2rem;
+$h2-font-size: 1.75rem;
+$h3-font-size: 1.5rem;
+$h4-font-size: 1.25rem;
+$h5-font-size: 1rem;
+$h6-font-size: 0.875rem;
+
+/* links */
+$links-color: $green;
+$links-text-decoration: none;
+$links-hover-color: $links-color;
+$links-hover-text-decoration: $links-text-decoration;
+$links-cursor: pointer;
+
+/* buttons */
+$buttons-cursor: pointer;
+
+/* transitions */
+$transition-duration: 0.2s;

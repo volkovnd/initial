@@ -3,6 +3,8 @@
     "stylelint.vscode-stylelint",
     "esbenp.prettier-vscode",
     "dbaeumer.vscode-eslint",
-    "editorconfig.editorconfig"
+    "editorconfig.editorconfig",
+    "octref.vetur",
+    "digitalbrainstem.javascript-ejs-support"
   ]
 }

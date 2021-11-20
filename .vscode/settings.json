@@ -1,49 +1,76 @@
 {
   "files.exclude": {
-    "**/.git": true,
-    "**/.svn": true,
-    "**/.hg": true,
-    "**/CVS": true,
-    "**/.DS_Store": true,
-    "**/Thumbs.db": true,
     "**/node_modules": true,
     "**/package-lock.json": true,
     "**/dist": true,
-    "**/.eslintcache": true
+    "**/.eslintcache": true,
+    "**/coverage": true
   },
   "files.encoding": "utf8",
   "files.eol": "\n",
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
 
+  "editor.renderFinalNewline": false,
   "editor.insertSpaces": true,
   "editor.tabSize": 2,
   "editor.trimAutoWhitespace": true,
+
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
+
   "editor.codeActionsOnSave": {
     "source.fixAll.stylelint": true
   },
 
+  "prettier.enable": true,
+
   "eslint.enable": true,
   "eslint.format.enable": true,
-  "eslint.validate": ["javascript"],
+  "eslint.validate": ["javascript", "vue"],
 
   "stylelint.enable": true,
-  "stylelint.validate": ["css", "scss"],
+  "stylelint.validate": ["css", "scss", "vue"],
+
+  "vetur.format.enable": false,
+
+  "html.format.enable": false,
+  "vetur.validation.template": false,
 
   "javascript.format.enable": false,
   "typescript.format.enable": false,
 
   "json.format.enable": false,
-  "html.format.enable": false,
+  "vetur.validation.script": false,
 
   "css.validate": false,
   "less.validate": false,
   "scss.validate": false,
+  "vetur.validation.style": false,
+
+  "vetur.completion.tagCasing": "kebab",
+
+  "javascript.suggest.autoImports": false,
+  "typescript.suggest.autoImports": false,
+  "vetur.completion.autoImport": false,
+
+  "javascript.updateImportsOnFileMove.enabled": "never",
+  "typescript.updateImportsOnFileMove.enabled": "never",
+  "vetur.languageFeatures.updateImportOnFileMove": false,
 
   "[javascript]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
   "[html]": {
-    "editor.defaultFormatter": "vscode.html-language-features"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[md]": {
+    "files.trimTrailingWhitespace": false,
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 80
   }
 }

@@ -1,32 +1,52 @@
 {
   "name": "@volkovnd/initial-new",
-  "private": true,
-  "description": "My initial project",
   "version": "0.1.0",
   "license": "MIT",
+  "author": "Volkov Nikolay <volkovnd@yandex.ru> (https://github.com/volkovnd/)",
+  "keywords": [],
+  "description": "My initial project",
+  "private": true,
   "scripts": {
-    "lint:javascript": "eslint . --cache --fix",
-    "lint:styles": "stylelint '**/*.{css,scss}' --fix",
+    "lint:javascript": "vue-cli-service lint --fix",
+    "lint:styles": "stylelint '**/*.{css,scss,vue}' --fix",
     "lint": "run-p lint:*",
+    "format": "prettier --loglevel warn --write \"**/*.{js,json,css,scss,vue,md,html}\"",
     "pretest": "npm run lint",
     "test": "echo \"Error: no test specified\" && exit 1",
     "posttest": "npm run format",
-    "format": "prettier --loglevel warn --write \"**/*.{js,json,css,scss,md,html}\"",
-    "clean": "rimraf dist"
+    "clean": "rimraf dist",
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build"
   },
-  "keywords": [],
-  "author": "Volkov Nikolay <volkovnd@yandex.ru> (https://github.com/volkovnd/)",
+  "dependencies": {
+    "core-js": "^3.19.1",
+    "normalize.css": "^8.0.1",
+    "vue": "^3.2.22"
+  },
   "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/eslint-parser": "^7.16.3",
+    "@vue/cli-plugin-babel": "~5.0.0-rc.1",
+    "@vue/cli-plugin-eslint": "~5.0.0-rc.1",
+    "@vue/cli-service": "~5.0.0-rc.1",
+    "cross-env": "^7.0.3",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-vue": "^8.1.1",
     "npm-run-all": "^4.1.5",
+    "postcss-html": "^1.2.0",
+    "postcss-preset-env": "^7.0.1",
+    "postcss-scss": "^4.0.2",
     "prettier": "^2.4.1",
     "rimraf": "^3.0.2",
+    "sass": "^1.43.4",
+    "sass-loader": "^12.3.0",
     "stylelint": "^14.1.0",
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-recess-order": "^3.0.0",
-    "stylelint-config-standard": "^24.0.0",
-    "stylelint-config-standard-scss": "^2.0.1"
+    "stylelint-config-recommended": "^6.0.0",
+    "stylelint-config-recommended-scss": "^5.0.1",
+    "stylelint-config-recommended-vue": "^1.0.0"
   }
 }

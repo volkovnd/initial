@@ -8,8 +8,14 @@
   "useTabs": false,
   "tabWidth": 2,
   "trailingComma": "es5",
-  "vueIndentScriptAndStyle": true,
+  "vueIndentScriptAndStyle": false,
   "overrides": [
+    {
+      "files": "*.html",
+      "options": {
+        "printWidth": 120
+      }
+    },
     {
       "files": "*.md",
       "options": {
@@ -18,18 +24,6 @@
         "trailingComma": "none",
         "arrowParens": "avoid",
         "proseWrap": "never"
-      }
-    },
-    {
-      "files": "*.html",
-      "options": {
-        "printWidth": 120
-      }
-    },
-    {
-      "files": "*.{json,babelrc,eslintrc,remarkrc,prettierrc,stylelintrc}",
-      "options": {
-        "useTabs": false
       }
     }
   ]
