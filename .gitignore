@@ -1,19 +1,23 @@
 node_modules/
-
 dist/
 
 .DS_Store
 Thumbs.db
 .idea/
 
+# ide
 .vscode/*
 !.vscode/settings.json
 !.vscode/launch.json
 !.vscode/tasks.json
 !.vscode/extensions.json
-
 *.sublime-project
 *.sublime-workspace
 *.log
 
+# cache
 .eslintcache
+
+# local env files
+.env.local
+.env.*.local
