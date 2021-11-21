@@ -20,11 +20,32 @@ module.exports = {
     },
   },
 
+  chainWebpack: (config) => {
+    /**
+     * Disable webpack perfomance errors while developing
+     */
+    config.performance.hints(
+      process.env.NODE_ENV === "production" && "warning"
+    );
+  },
+
   devServer: {
-    compress: true,
-    hot: true,
+    client: {
+      /**
+       * Enable special webpack-dev-server wrapper
+       * for displaying warnings and errors on client
+       */
+      overlay: {
+        errors: true,
+        warnings: true,
+      },
+    },
+
     onBeforeSetupMiddleware: (devServer) => {
       devServer.app.use((request, response, next) => {
+        /**
+         * Stop problems with CORS
+         */
         response.header("Access-Control-Allow-Origin", "*");
 
         next();

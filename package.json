@@ -7,16 +7,17 @@
   "description": "My initial project",
   "private": true,
   "scripts": {
-    "lint:javascript": "vue-cli-service lint --fix",
-    "lint:styles": "stylelint '**/*.{css,scss,vue}' --fix",
-    "lint": "run-p lint:*",
-    "format": "prettier --loglevel warn --write \"**/*.{js,json,css,scss,vue,md,html}\"",
-    "pretest": "npm run lint",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "posttest": "npm run format",
+    "lint:eslint": "eslint --fix",
+    "lint:stylelint": "stylelint --fix",
+    "lint:prettier": "prettier --write --loglevel warn",
+    "lint:all:eslint": "npm run lint:eslint -- --ext .js,.vue .",
+    "lint:all:stylelint": "npm run lint:stylelint -- \"src/**/*.{vue,scss}\"",
+    "lint:all:prettier": "npm run lint:prettier -- \"**/*.{js,json,css,scss,vue,html,md}\"",
+    "lint": "run-s lint:all:*",
     "clean": "rimraf dist",
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "start": "npm run serve -- --open"
   },
   "dependencies": {
     "core-js": "^3.19.1",
