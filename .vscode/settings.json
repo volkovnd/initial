@@ -4,6 +4,7 @@
     "**/package-lock.json": true,
     "**/dist": true,
     "**/.eslintcache": true,
+    "**/.gitattributes": true,
     "**/coverage": true
   },
   "files.encoding": "utf8",
