@@ -13,6 +13,9 @@
   "files.trimTrailingWhitespace": true,
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
+  "files.associations": {
+    ".markdownlintrc": "jsonc"
+  },
 
   "editor.renderFinalNewline": false,
   "editor.insertSpaces": true,
@@ -23,7 +26,12 @@
   "editor.formatOnSave": true,
 
   "editor.codeActionsOnSave": {
-    "source.fixAll.stylelint": true
+    "source.fixAll.stylelint": true,
+    "source.fixAll.markdownlint": true
+  },
+
+  "emmet.includeLanguages": {
+    "vue-html": "html"
   },
 
   "prettier.enable": true,
@@ -65,6 +73,9 @@
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
   "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[vue-html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[vue]": {

@@ -5,6 +5,7 @@
     "dbaeumer.vscode-eslint",
     "editorconfig.editorconfig",
     "octref.vetur",
-    "digitalbrainstem.javascript-ejs-support"
+    "digitalbrainstem.javascript-ejs-support",
+    "davidanson.vscode-markdownlint"
   ]
 }
