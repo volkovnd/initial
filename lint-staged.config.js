@@ -11,5 +11,5 @@ module.exports = {
   ],
   "*.{css,scss}": ["npm run lint:stylelint", "npm run lint:prettier"],
   "*.md": ["npm run lint:markdownlint", "npm run lint:prettier"],
-  "*.{png,jpeg,jpg,gif,svg}": ["imagemin-lint-staged"],
+  "*.{png,jpeg,jpg,gif,svg}": ["lint-staged-imagemin"],
 };
