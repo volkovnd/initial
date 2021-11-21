@@ -70,6 +70,12 @@
   "typescript.updateImportsOnFileMove.enabled": "never",
   "vetur.languageFeatures.updateImportOnFileMove": false,
 
+  "testExplorer.addToEditorContextMenu": true,
+  "jest.autoRun": "off",
+  "jest.testExplorer": {
+    "enabled": true
+  },
+
   "[javascript]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },

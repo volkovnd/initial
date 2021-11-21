@@ -55,7 +55,10 @@
         "panel": "new",
         "close": true
       },
-      "runOptions": { "instanceLimit": 1, "reevaluateOnRerun": true }
+      "runOptions": {
+        "instanceLimit": 1,
+        "reevaluateOnRerun": true
+      }
     }
   ]
 }

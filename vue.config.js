@@ -1,10 +1,12 @@
+const { defineConfig } = require("@vue/cli-service");
+
 const scssLoaderAdditionalDataPaths = [
   "~@/assets/scss/variables",
   "~@/assets/scss/mixins",
 ];
 
 /** @type {import("@vue/cli-service").ProjectOptions} */
-module.exports = {
+module.exports = defineConfig({
   lintOnSave: false,
   productionSourceMap: false,
 
@@ -20,36 +22,24 @@ module.exports = {
     },
   },
 
-  chainWebpack: (config) => {
-    /**
-     * Disable webpack perfomance errors while developing
-     */
-    config.performance.hints(
-      process.env.NODE_ENV === "production" && "warning"
-    );
+  transpileDependencies: true,
+});
+
+/** @type {import("webpack-dev-server").Configuration} */
+module.exports.devServer = {
+  client: {
+    overlay: {
+      errors: true,
+      warnings: true,
+    },
   },
 
-  devServer: {
-    client: {
-      /**
-       * Enable special webpack-dev-server wrapper
-       * for displaying warnings and errors on client
-       */
-      overlay: {
-        errors: true,
-        warnings: true,
-      },
-    },
+  onBeforeSetupMiddleware: (devServer) => {
+    devServer.app.use((request, response, next) => {
+      /** Stop problems with CORS*/
+      response.header("Access-Control-Allow-Origin", "*");
 
-    onBeforeSetupMiddleware: (devServer) => {
-      devServer.app.use((request, response, next) => {
-        /**
-         * Stop problems with CORS
-         */
-        response.header("Access-Control-Allow-Origin", "*");
-
-        next();
-      });
-    },
+      next();
+    });
   },
 };

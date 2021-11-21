@@ -12,9 +12,18 @@ module.exports = {
     parser: "@babel/eslint-parser",
   },
   rules: {
-    "no-console": process.env.PRE_COMMIT
-      ? ["error", { allow: ["warn", "error"] }]
-      : "off",
-    "no-debugger": process.env.PRE_COMMIT ? "error" : "off",
+    "no-debugger": process.env.NODE_ENV === "production" ? "warning" : "off",
+    "no-console": process.env.NODE_ENV === "production" ? "warning" : "off",
   },
+  overrides: [
+    {
+      files: [
+        "**/__tests__/*.{j,t}s?(x)",
+        "**/tests/unit/**/*.spec.{j,t}s?(x)",
+      ],
+      env: {
+        jest: true,
+      },
+    },
+  ],
 };
