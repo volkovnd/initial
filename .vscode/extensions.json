@@ -6,6 +6,9 @@
     "editorconfig.editorconfig",
     "octref.vetur",
     "digitalbrainstem.javascript-ejs-support",
-    "davidanson.vscode-markdownlint"
+    "davidanson.vscode-markdownlint",
+    "orta.vscode-jest",
+    "hbenl.vscode-test-explorer",
+    "ms-vscode.test-adapter-converter"
   ]
 }
