@@ -1,6 +1,6 @@
 module.exports = {
-  "syntax": "postcss-scss",
-  "plugins": {
-    "postcss-preset-env": {}
-  }
-}
+  syntax: "postcss-scss",
+  plugins: {
+    "postcss-preset-env": {},
+  },
+};
