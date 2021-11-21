@@ -6,7 +6,8 @@
     "**/.eslintcache": true,
     "**/.gitattributes": true,
     "**/coverage": true,
-    "**/.husky": true
+    "**/.husky": true,
+    "**/.github": true
   },
   "files.encoding": "utf8",
   "files.eol": "\n",
