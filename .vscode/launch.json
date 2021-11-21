@@ -6,7 +6,7 @@
       "request": "launch",
       "name": "vuejs: chrome",
       "url": "http://localhost:8080",
-      "webRoot": "${workspaceFolder}",
+      "webRoot": "${workspaceFolder}/src",
       "breakOnLoad": true,
       "pathMapping": {
         "/_karma_webpack_": "${workspaceFolder}"
