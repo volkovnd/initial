@@ -12,8 +12,8 @@ module.exports = {
     parser: "@babel/eslint-parser",
   },
   rules: {
-    "no-debugger": process.env.NODE_ENV === "production" ? "warning" : "off",
-    "no-console": process.env.NODE_ENV === "production" ? "warning" : "off",
+    "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
+    "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
   },
   overrides: [
     {
